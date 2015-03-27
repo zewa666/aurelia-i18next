@@ -11,7 +11,7 @@ describe('feature verification pluralization', () => {
           "lives": "__count__ life remaining",
           "lives_plural": "__count__ lives remaining",
           "lives_indefinite": "a life remaining",
-          "lives_plural_indefinite": "some lifes remaining",
+          "lives_plural_indefinite": "some lives remaining",
         }
       }
     };
@@ -44,6 +44,6 @@ describe('feature verification pluralization', () => {
   });
 
   it('should return plural indefinite translation', () => {
-    expect(sut.tr('lives', { count: 2, indefinite_article: true })).toEqual('some lifes remaining');
+    expect(sut.tr('lives', { count: 2, indefinite_article: true })).toEqual('some lives remaining');
   });
 });

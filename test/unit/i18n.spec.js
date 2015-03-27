@@ -12,7 +12,7 @@ describe('testing i18n translations', () => {
           "lives": "__count__ life remaining",
           "lives_plural": "__count__ lives remaining",
           "lives_indefinite": "a life remaining",
-          "lives_plural_indefinite": "some lifes remaining",
+          "lives_plural_indefinite": "some lives remaining",
           "friend": "A friend",
           "friend_male": "A boyfriend",
           "friend_female": "A girlfriend"

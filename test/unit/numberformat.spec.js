@@ -11,7 +11,7 @@ describe('numberformat tests', () => {
           "lives": "__count__ life remaining",
           "lives_plural": "__count__ lives remaining",
           "lives_indefinite": "a life remaining",
-          "lives_plural_indefinite": "some lifes remaining",
+          "lives_plural_indefinite": "some lives remaining",
         }
       }
     };
