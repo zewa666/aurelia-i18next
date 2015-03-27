@@ -11,9 +11,9 @@ export class I18N {
       resGetPath : 'locale/__lng__/__ns__.json',
       lng : 'en',
       getAsync : false,
-      sendMissing : true,
+      sendMissing : false,
       fallbackLng : 'en',
-      debug : true
+      debug : false
     };
 
     i18n.init(options || defaultOptions);
@@ -25,7 +25,7 @@ export class I18N {
 
   setLocale(locale) {
     return new Promise( (resolve) => {
-      this.i18next.setLng(locale, resolve(t));
+      this.i18next.setLng(locale, resolve);
     });
   }
 
