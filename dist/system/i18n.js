@@ -26,9 +26,9 @@ System.register(["i18next"], function (_export) {
                 resGetPath: "locale/__lng__/__ns__.json",
                 lng: "en",
                 getAsync: false,
-                sendMissing: true,
+                sendMissing: false,
                 fallbackLng: "en",
-                debug: true
+                debug: false
               };
 
               i18n.init(options || defaultOptions);
@@ -41,7 +41,7 @@ System.register(["i18next"], function (_export) {
               var _this = this;
 
               return new Promise(function (resolve) {
-                _this.i18next.setLng(locale, resolve(t));
+                _this.i18next.setLng(locale, resolve);
               });
             }
           },
