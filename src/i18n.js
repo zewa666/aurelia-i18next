@@ -4,6 +4,14 @@ export class I18N {
 
   constructor() {
     this.i18next = i18n;
+    this.Intl = window.Intl;
+
+    // check whether Intl is available, otherwise load the polyfill
+    if(window.Intl === undefined) {
+      System.import('Intl').then( (poly) => {
+        window.Intl = poly;
+      });
+    }
   }
 
   setup(options) {
@@ -17,10 +25,6 @@ export class I18N {
     };
 
     i18n.init(options || defaultOptions);
-
-    this.activeLocale = options !== undefined
-      ? options.lng | defaultOptions.lng
-      : defaultOptions.lng;
   }
 
   setLocale(locale) {
@@ -31,6 +35,10 @@ export class I18N {
 
   getLocale() {
     return this.i18next.lng();
+  }
+
+  NumberFormat(locales, options) {
+    return new this.Intl.NumberFormat(locales || this.getLocale(), options);
   }
 
   tr(key, options) {
