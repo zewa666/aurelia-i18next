@@ -39,7 +39,7 @@ describe('testing i18n translations', () => {
       getAsync : false,
       sendMissing : false,
       fallbackLng : 'en',
-      debug : true
+      debug : false
     });
   });
 
@@ -58,7 +58,7 @@ describe('testing i18n translations', () => {
   });
 
   it('should pass on provided options', () => {
-    expect(sut.i18next.options.debug).toBe(true);
+    expect(sut.i18next.options.debug).toBe(false);
     expect(sut.i18next.options.sendMissing).toBe(false);
     expect(sut.i18next.options.fallbackLng).toEqual(['en']);
   });
