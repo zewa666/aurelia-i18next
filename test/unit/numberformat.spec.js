@@ -45,4 +45,11 @@ describe('numberformat tests', () => {
     });
   });
 
+  it('should display number as currency',() => {
+    var nf = sut.NumberFormat('de', { style: 'currency', currency: 'EUR' });
+    var testNumber = 123456.789;
+
+    expect(nf.format(testNumber)).toBe('123.456,789 €');
+  });
+
 });
