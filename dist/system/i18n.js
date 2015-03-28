@@ -17,6 +17,14 @@ System.register(["i18next"], function (_export) {
           _classCallCheck(this, I18N);
 
           this.i18next = i18n;
+          this.Intl = window.Intl;
+
+          // check whether Intl is available, otherwise load the polyfill
+          if (window.Intl === undefined) {
+            System["import"]("Intl").then(function (poly) {
+              window.Intl = poly;
+            });
+          }
         }
 
         _createClass(I18N, {
@@ -32,8 +40,6 @@ System.register(["i18next"], function (_export) {
               };
 
               i18n.init(options || defaultOptions);
-
-              this.activeLocale = options !== undefined ? options.lng | defaultOptions.lng : defaultOptions.lng;
             }
           },
           setLocale: {
@@ -48,6 +54,11 @@ System.register(["i18next"], function (_export) {
           getLocale: {
             value: function getLocale() {
               return this.i18next.lng();
+            }
+          },
+          NumberFormat: {
+            value: function NumberFormat(locales, options) {
+              return new this.Intl.NumberFormat(locales || this.getLocale(), options);
             }
           },
           tr: {
