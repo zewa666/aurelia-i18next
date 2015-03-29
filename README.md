@@ -4,9 +4,9 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
 
 > To keep up to date on [Aurelia](http://www.aurelia.io/), please visit and subscribe to [the official blog](http://blog.durandal.io/). If you have questions, we invite you to join us on [![Join the chat at https://gitter.im/aurelia/discuss](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aurelia/discuss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge).
 
-## How to intall this plugin?
+## How to install this plugin?
 
-1. In your project install the plugin via jspm with following command
+1. In your project install the plugin via `jspm` with following command
 
   ```shell
   jspm install aurelia-i18next
@@ -27,7 +27,7 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
   "lives": "__count__ life remaining",
   "lives_plural": "__count__ lives remaining",
   "lives_indefinite": "a life remaining",
-  "lives_plural_indefinite": "some lifes remaining",
+  "lives_plural_indefinite": "some lives remaining",
   "friend": "A friend",
   "friend_male": "A boyfriend",
   "friend_female": "A girlfriend"
@@ -165,3 +165,69 @@ You will find below a few examples of the available [i18next features](http://i1
   </section>
 </template>
 ```
+
+### Formatting numbers via code
+For displaying numbers in different formats, this plugin makes use of the [Internationalization API NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat). It leverages the same locales used for the translation methods mentioned in the install process of the plugin.
+
+The API provides access to the `Intl NumberFormat` with the method `NumberFormat`. This function takes the a locale as first and an object as the second parameter, representing the formatting-options.
+
+Below is an example how to access the NumberFormat via code:
+
+```javascript
+import {I18N} from 'aurelia-i18next';
+
+export class MyDemoVM {
+  static inject() { return [I18N]; }
+	constructor(i18n) {
+	  this.i18n = i18n;
+	    
+	  // create a NumberFormat with German locale
+      var nf = this.i18n.NumberFormat('de');
+	  var result = nf.format(123456.123)
+		
+	  console.log(result);
+	  // output => 123.456,123
+
+		
+	  // create a NumberFormat with currency options
+	  var nf = this.i18n.NumberFormat('de', 
+  	    { style: 'currency', currency: 'EUR' });
+
+	  var result = nf.format(123456.123)
+		
+	  console.log(result);
+	  // output => 123.456,123 €  	  
+	}
+	...
+}
+```
+
+
+### Formatting numbers with NfValueConverter
+A more declarative way is to use the `nf` ValueConverter from within your HTML markup. It essentially works the same way as the code version. Take a look at the following example:
+
+```html
+<div class="col-md-3">
+  <h3>ValueConverter Number Examples</h3>
+  <ul class="list-group">
+    <li class="list-group-item">
+      Numberformat with default locale/format:
+      ${ 1234567.890 | nf : selectedLocale}
+    </li>
+    <li class="list-group-item">
+      Numberformat with different locale default format:
+      ${ 1234567.890 | nf : 'de'}
+    </li>
+    <li class="list-group-item">
+      Numberformat with different locale/format:
+      ${ 1234567.890 | nf : 'de' : { style: 'currency', currency: 'EUR' }}
+    </li>
+    <li class="list-group-item">
+      Numberformat with custom NumberFormat:
+      ${ 1234567.890 | nf : ['customFormat', customNumberFormat] }
+    </li>
+  </ul>
+</div>
+```
+
+> Note that if you provide the active locale as a bound VM property, the ValueConverter will be re-evaluated as soon as the property value changes, resulting in automatic re-formatting of your number.
