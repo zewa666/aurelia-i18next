@@ -6,6 +6,7 @@ System.register(["./i18n"], function (_export) {
   function install(aurelia) {
     aurelia.globalizeResources("./t");
     aurelia.globalizeResources("./nf");
+    aurelia.globalizeResources("./df");
     aurelia.container.registerInstance(I18N, new I18N());
   }
 

@@ -56,9 +56,14 @@ var I18N = exports.I18N = (function () {
         return this.i18next.lng();
       }
     },
-    NumberFormat: {
-      value: function NumberFormat(locales, options) {
+    nf: {
+      value: function nf(options, locales) {
         return new this.Intl.NumberFormat(locales || this.getLocale(), options);
+      }
+    },
+    df: {
+      value: function df(options, locales) {
+        return new this.Intl.DateTimeFormat(locales || this.getLocale(), options);
       }
     },
     tr: {

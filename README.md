@@ -73,7 +73,7 @@ import {I18N} from 'aurelia-i18next';
 export class MyDemoVM {
 	static inject() { return [I18N]; }
 	constructor(i18n) {
-	   this.i18n = i18n;
+	  this.i18n = i18n;
 		this.i18n
 		    .setLocale('de-DE')
 		    .then( () => {
@@ -93,8 +93,8 @@ import {I18N} from 'aurelia-i18next';
 export class MyDemoVM {
 	static inject() { return [I18N]; }
 	constructor(i18n) {
-	    this.i18n = i18n;
-		console.log(this.i18n.getLocale());
+	   this.i18n = i18n;
+		 console.log(this.i18n.getLocale());
 	}
 	...
 }
@@ -109,8 +109,8 @@ import {I18N} from 'aurelia-i18next';
 export class MyDemoVM {
 	static inject() { return [I18N]; }
 	constructor(i18n) {
-	    this.i18n = i18n;
-		console.log(this.i18n.tr('mykey'));
+	   this.i18n = i18n;
+		 console.log(this.i18n.tr('mykey'));
 	}
 	...
 }
@@ -169,7 +169,7 @@ You will find below a few examples of the available [i18next features](http://i1
 ### Formatting numbers via code
 For displaying numbers in different formats, this plugin makes use of the [Internationalization API NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat). It leverages the same locales used for the translation methods mentioned in the install process of the plugin.
 
-The API provides access to the `Intl NumberFormat` with the method `NumberFormat`. This function takes the a locale as first and an object as the second parameter, representing the formatting-options.
+The API provides access to the `Intl NumberFormat` with the method `NumberFormat`. This function takes the an options object representing the formatting options as the first and the locale as the second parameter.
 
 Below is an example how to access the NumberFormat via code:
 
@@ -182,18 +182,17 @@ export class MyDemoVM {
 	  this.i18n = i18n;
 	    
 	  // create a NumberFormat with German locale
-      var nf = this.i18n.NumberFormat('de');
-	  var result = nf.format(123456.123)
+    var nf = this.i18n.nf(undefined, 'de');
+	  var result = nf.format(123456.123);
 		
 	  console.log(result);
 	  // output => 123.456,123
 
 		
 	  // create a NumberFormat with currency options
-	  var nf = this.i18n.NumberFormat('de', 
-  	    { style: 'currency', currency: 'EUR' });
+	  var nf = this.i18n.NumberFormat({ style: 'currency', currency: 'EUR' }, 'de');
 
-	  var result = nf.format(123456.123)
+	  var result = nf.format(123456.123);
 		
 	  console.log(result);
 	  // output => 123.456,123 €  	  
@@ -212,22 +211,83 @@ A more declarative way is to use the `nf` ValueConverter from within your HTML m
   <ul class="list-group">
     <li class="list-group-item">
       Numberformat with default locale/format:
-      ${ 1234567.890 | nf : selectedLocale}
+      ${ 1234567.890 | nf : undefined : selectedLocale}
     </li>
     <li class="list-group-item">
       Numberformat with different locale default format:
-      ${ 1234567.890 | nf : 'de'}
+      ${ 1234567.890 | nf : undefined : 'de'}
     </li>
     <li class="list-group-item">
       Numberformat with different locale/format:
-      ${ 1234567.890 | nf : 'de' : { style: 'currency', currency: 'EUR' }}
-    </li>
-    <li class="list-group-item">
-      Numberformat with custom NumberFormat:
-      ${ 1234567.890 | nf : ['customFormat', customNumberFormat] }
+      ${ 1234567.890 | nf : { style: 'currency', currency: 'EUR' } : 'de'}
     </li>
   </ul>
 </div>
 ```
 
 > Note that if you provide the active locale as a bound VM property, the ValueConverter will be re-evaluated as soon as the property value changes, resulting in automatic re-formatting of your number.
+
+
+### Formatting dates via code
+
+The Intl. API provides means to [format DateTimes](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat) as well. Use the method `df` to access that feature with the same arguments used for NumberFormat
+Below you'll find an example how to use those via code:
+
+```javascript
+import {I18N} from 'aurelia-i18next';
+
+export class MyDemoVM {
+  static inject() { return [I18N]; }
+	constructor(i18n) {
+	  this.i18n = i18n;
+	    
+	  // create a DateTimeFormat with German locale
+    var df = this.i18n.df(undefined, 'de');
+	  var result = df.format(new Date(2000, 0, 1, 0,0,1))
+		
+	  console.log(result);
+	  // output => 1.1.2000
+
+		
+	  // create a DateTime with time and 2-digit display
+	  var options = {
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false
+    };
+	  var df = this.i18n.df(options, 'de');
+
+	  var result = df.format(new Date(2000, 0, 1, 0,0,1));
+		
+	  console.log(result);
+	  // output => 01.01.2000 00:00:01  	  
+	}
+	...
+}
+```
+
+> Remember that if you pass in `undefined` for the options parameter you'll get the default formatting options
+
+### Formatting dates with DfValueConverter
+A more declarative way is to use the `df` ValueConverter from within your HTML markup. It essentially works the same way as the code version. Take a look at the following example, which defines a VM property myDate:
+
+
+```html
+<div class="col-md-3">
+  <h3>ValueConverter Date Examples</h3>
+  <ul class="list-group">
+    <li class="list-group-item">
+      DateFormat with default locale/format:
+      ${ myDate | df : undefined : selectedLocale}
+    </li>
+    <li class="list-group-item">
+      DateFormat with different locale default format:
+      ${ myDate | df : undefined : 'de'}
+    </li>
+    <li class="list-group-item">
+      DateFormat with different locale/format:
+      ${ myDate | df : { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' } : 'de'}
+    </li>
+  </ul>
+</div>
+```

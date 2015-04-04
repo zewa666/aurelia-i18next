@@ -13,5 +13,6 @@ exports.I18N = _i18n.I18N;
 function install(aurelia) {
   aurelia.globalizeResources("./t");
   aurelia.globalizeResources("./nf");
+  aurelia.globalizeResources("./df");
   aurelia.container.registerInstance(I18N, new I18N());
 }

@@ -10,19 +10,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var I18N = require("./i18n").I18N;
 
-var NfValueConverter = exports.NfValueConverter = (function () {
-  function NfValueConverter(i18n) {
-    _classCallCheck(this, NfValueConverter);
+var DfValueConverter = exports.DfValueConverter = (function () {
+  function DfValueConverter(i18n) {
+    _classCallCheck(this, DfValueConverter);
 
     this.service = i18n;
   }
 
-  _createClass(NfValueConverter, {
+  _createClass(DfValueConverter, {
     toView: {
-      value: function toView(value, locale, formatOptions, numberFormat) {
-        var nf = numberFormat || this.service.nf(formatOptions, locale || this.service.getLocale());
+      value: function toView(value, locale, formatOptions, dateFormat) {
+        var df = dateFormat || this.service.df(formatOptions, locale || this.service.getLocale());
 
-        return nf.format(value);
+        return df.format(value);
       }
     }
   }, {
@@ -33,5 +33,5 @@ var NfValueConverter = exports.NfValueConverter = (function () {
     }
   });
 
-  return NfValueConverter;
+  return DfValueConverter;
 })();

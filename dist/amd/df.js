@@ -10,19 +10,19 @@ define(["exports", "./i18n"], function (exports, _i18n) {
   });
   var I18N = _i18n.I18N;
 
-  var NfValueConverter = exports.NfValueConverter = (function () {
-    function NfValueConverter(i18n) {
-      _classCallCheck(this, NfValueConverter);
+  var DfValueConverter = exports.DfValueConverter = (function () {
+    function DfValueConverter(i18n) {
+      _classCallCheck(this, DfValueConverter);
 
       this.service = i18n;
     }
 
-    _createClass(NfValueConverter, {
+    _createClass(DfValueConverter, {
       toView: {
-        value: function toView(value, locale, formatOptions, numberFormat) {
-          var nf = numberFormat || this.service.nf(formatOptions, locale || this.service.getLocale());
+        value: function toView(value, locale, formatOptions, dateFormat) {
+          var df = dateFormat || this.service.df(formatOptions, locale || this.service.getLocale());
 
-          return nf.format(value);
+          return df.format(value);
         }
       }
     }, {
@@ -33,6 +33,6 @@ define(["exports", "./i18n"], function (exports, _i18n) {
       }
     });
 
-    return NfValueConverter;
+    return DfValueConverter;
   })();
 });

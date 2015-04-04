@@ -28,7 +28,7 @@ describe('numberformat tests', () => {
   });
 
   it('should display number in the setup locale format by default', () => {
-    var nf = sut.NumberFormat();
+    var nf = sut.nf();
     var testNumber = 123456.789;
 
     expect(nf.format(testNumber)).toEqual('123,456.789');
@@ -36,7 +36,7 @@ describe('numberformat tests', () => {
 
   it('should display number in the previously modified locale', (done) => {
     sut.setLocale('de').then( () => {
-      var nf = sut.NumberFormat();
+      var nf = sut.nf();
       var testNumber = 123456.789;
 
       expect(nf.format(testNumber)).toEqual('123.456,789');
@@ -46,7 +46,7 @@ describe('numberformat tests', () => {
   });
 
   it('should display number as currency',() => {
-    var nf = sut.NumberFormat('de', { style: 'currency', currency: 'EUR' });
+    var nf = sut.nf({ style: 'currency', currency: 'EUR' }, 'de');
     var testNumber = 123456.789;
 
     expect(nf.format(testNumber)).toBe('123.456,789 €');

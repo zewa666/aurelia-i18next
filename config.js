@@ -1,7 +1,7 @@
 System.config({
   "paths": {
     "*": "*.js",
-    "aurelia-i18next/*": "dist/system/*.js",
+    "aurelia-i18next/*": "dist\\system/*.js",
     "github:*": "jspm_packages/github/*.js"
   }
 });

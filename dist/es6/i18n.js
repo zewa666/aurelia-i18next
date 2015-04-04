@@ -37,8 +37,12 @@ export class I18N {
     return this.i18next.lng();
   }
 
-  NumberFormat(locales, options) {
+  nf(options, locales) {
     return new this.Intl.NumberFormat(locales || this.getLocale(), options);
+  }
+
+  df(options, locales) {
+    return new this.Intl.DateTimeFormat(locales || this.getLocale(), options);
   }
 
   tr(key, options) {

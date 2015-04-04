@@ -1,5 +1,5 @@
 System.register(["./i18n"], function (_export) {
-  var I18N, _createClass, _classCallCheck, NfValueConverter;
+  var I18N, _createClass, _classCallCheck, DfValueConverter;
 
   return {
     setters: [function (_i18n) {
@@ -12,19 +12,19 @@ System.register(["./i18n"], function (_export) {
 
       _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-      NfValueConverter = _export("NfValueConverter", (function () {
-        function NfValueConverter(i18n) {
-          _classCallCheck(this, NfValueConverter);
+      DfValueConverter = _export("DfValueConverter", (function () {
+        function DfValueConverter(i18n) {
+          _classCallCheck(this, DfValueConverter);
 
           this.service = i18n;
         }
 
-        _createClass(NfValueConverter, {
+        _createClass(DfValueConverter, {
           toView: {
-            value: function toView(value, locale, formatOptions, numberFormat) {
-              var nf = numberFormat || this.service.nf(formatOptions, locale || this.service.getLocale());
+            value: function toView(value, locale, formatOptions, dateFormat) {
+              var df = dateFormat || this.service.df(formatOptions, locale || this.service.getLocale());
 
-              return nf.format(value);
+              return df.format(value);
             }
           }
         }, {
@@ -35,7 +35,7 @@ System.register(["./i18n"], function (_export) {
           }
         });
 
-        return NfValueConverter;
+        return DfValueConverter;
       })());
     }
   };
