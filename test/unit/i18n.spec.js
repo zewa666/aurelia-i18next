@@ -15,7 +15,8 @@ describe('testing i18n translations', () => {
           "lives_plural_indefinite": "some lives remaining",
           "friend": "A friend",
           "friend_male": "A boyfriend",
-          "friend_female": "A girlfriend"
+          "friend_female": "A girlfriend",
+          "complex": '__field__ should be between __threshold.min__ and __threshold.max__'
         }
       },
       de: {
@@ -61,5 +62,17 @@ describe('testing i18n translations', () => {
     expect(sut.i18next.options.debug).toBe(false);
     expect(sut.i18next.options.sendMissing).toBe(false);
     expect(sut.i18next.options.fallbackLng).toEqual(['en']);
+  });
+
+  it('should map complex object', () => {
+    var options = {
+      'threshold': {
+        'min': 1,
+        'max': 10
+      },
+      'field': 'Age'
+    };
+
+    expect(sut.tr('complex', options)).toEqual('Age should be between 1 and 10');
   });
 });

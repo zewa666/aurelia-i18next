@@ -8,10 +8,13 @@ define(["exports", "./i18n"], function (exports, _i18n) {
   var I18N = _i18n.I18N;
   exports.I18N = _i18n.I18N;
 
-  function install(aurelia) {
+  function install(aurelia, cb) {
     aurelia.globalizeResources("./t");
     aurelia.globalizeResources("./nf");
     aurelia.globalizeResources("./df");
-    aurelia.container.registerInstance(I18N, new I18N());
+    var instance = new I18N();
+    aurelia.container.registerInstance(I18N, instance);
+
+    cb(instance);
   }
 });

@@ -3,11 +3,14 @@ System.register(["./i18n"], function (_export) {
 
   _export("install", install);
 
-  function install(aurelia) {
+  function install(aurelia, cb) {
     aurelia.globalizeResources("./t");
     aurelia.globalizeResources("./nf");
     aurelia.globalizeResources("./df");
-    aurelia.container.registerInstance(I18N, new I18N());
+    var instance = new I18N();
+    aurelia.container.registerInstance(I18N, instance);
+
+    cb(instance);
   }
 
   return {

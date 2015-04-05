@@ -43,19 +43,17 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
     aurelia.use
       .standardConfiguration()
       .developmentLogging()
-      .plugin('aurelia-i18next');
-
-    // get instance of the i18n plugin
-    var instance = aurelia.container.get(I18N);
-    // adapt options to your needs (see http://i18next.com/pages/doc_init.html)
-    instance.setup({
-      resGetPath : 'locale/__lng__/__ns__.json',
-      lng : 'de',
-      getAsync : true,
-      sendMissing : false,
-      fallbackLng : 'en',
-      debug : false
-    });
+      .plugin('aurelia-i18next', (instance) => {
+        // adapt options to your needs (see http://i18next.com/pages/doc_init.html)
+        instance.setup({
+          resGetPath : 'locale/__lng__/__ns__.json',
+          lng : 'de',
+          getAsync : true,
+          sendMissing : false,
+          fallbackLng : 'en',
+          debug : false
+        });
+      });
 
     aurelia.start().then(a => a.setRoot());
   }

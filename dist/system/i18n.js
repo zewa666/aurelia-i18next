@@ -66,9 +66,32 @@ System.register(["i18next"], function (_export) {
               return new this.Intl.DateTimeFormat(locales || this.getLocale(), options);
             }
           },
+          extend: {
+            value: function extend(destination, source) {
+              for (var property in source) destination[property] = source[property];
+              return destination;
+            }
+          },
+          assignObjectToKeys: {
+            value: function assignObjectToKeys(root, obj) {
+              var _this = this;
+
+              var opts = {};
+
+              Object.keys(obj).map(function (key) {
+                if (typeof obj[key] === "object") {
+                  _this.extend(opts, _this.assignObjectToKeys(key, obj[key]));
+                } else {
+                  opts[root !== "" ? root + "." + key : key] = obj[key];
+                }
+              });
+
+              return opts;
+            }
+          },
           tr: {
             value: function tr(key, options) {
-              return this.i18next.t(key, options);
+              return this.i18next.t(key, this.assignObjectToKeys("", options));
             }
           }
         });
