@@ -164,6 +164,39 @@ You will find below a few examples of the available [i18next features](http://i1
 </template>
 ```
 
+### Complex objects for variables
+In some cases it might be useful to define variables via complex objects. Let's take a look at below example. It shows a validation message to hint the user that a given field should be in range of min and max.
+Now we could easily pass min and max as separate variables but on the other hand that involves more work you'd have to do manually if the source is a object.
+
+```javascript
+var resources = {
+  en: {
+    translation: {
+      "complex": '__field__ should be between __threshold.min__ and __threshold.max__'
+    }
+  }
+};
+```
+
+So in order to avoid that you may simply pass in the object as a whole and the library will pickup all the necessary information and create the proper options object.
+You can also mix and match it with simple variables.
+
+```javascript
+var options = {
+  'threshold': {
+    'min': 1,
+    'max': 10
+  },
+  'field': 'Age'
+};
+
+i18n.tr('complex', options);
+// --> Age should be between 1 and 10
+```
+
+
+
+
 ### Formatting numbers via code
 For displaying numbers in different formats, this plugin makes use of the [Internationalization API NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat). It leverages the same locales used for the translation methods mentioned in the install process of the plugin.
 
