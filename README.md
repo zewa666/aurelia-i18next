@@ -4,6 +4,27 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
 
 > To keep up to date on [Aurelia](http://www.aurelia.io/), please visit and subscribe to [the official blog](http://blog.durandal.io/). If you have questions, we invite you to join us on [![Join the chat at https://gitter.im/aurelia/discuss](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aurelia/discuss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge).
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [How to install this plugin?](#how-to-install-this-plugin)
+- [How to use this plugin](#how-to-use-this-plugin)
+  - [Setting the active locale](#setting-the-active-locale)
+  - [Getting the active locale](#getting-the-active-locale)
+  - [Translating via code](#translating-via-code)
+  - [Translating with the TValueConverter](#translating-with-the-tvalueconverter)
+  - [ValueConverter Examples](#valueconverter-examples)
+  - [Complex objects for variables](#complex-objects-for-variables)
+  - [Formatting numbers via code](#formatting-numbers-via-code)
+  - [Formatting numbers with NfValueConverter](#formatting-numbers-with-nfvalueconverter)
+  - [ValueConverter Number Examples](#valueconverter-number-examples)
+  - [Formatting dates via code](#formatting-dates-via-code)
+  - [Formatting dates with DfValueConverter](#formatting-dates-with-dfvalueconverter)
+  - [ValueConverter Date Examples](#valueconverter-date-examples)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## How to install this plugin?
 
 1. In your project install the plugin via `jspm` with following command
