@@ -13,15 +13,12 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
   - [Setting the active locale](#setting-the-active-locale)
   - [Getting the active locale](#getting-the-active-locale)
   - [Translating via code](#translating-via-code)
-  - [Translating with the TValueConverter](#translating-with-the-tvalueconverter)
-  - [ValueConverter Examples](#valueconverter-examples)
+  - [Translating with the TValueConverter](#translating-with-the-tvalueconverter)  
   - [Complex objects for variables](#complex-objects-for-variables)
   - [Formatting numbers via code](#formatting-numbers-via-code)
-  - [Formatting numbers with NfValueConverter](#formatting-numbers-with-nfvalueconverter)
-  - [ValueConverter Number Examples](#valueconverter-number-examples)
+  - [Formatting numbers with NfValueConverter](#formatting-numbers-with-nfvalueconverter)  
   - [Formatting dates via code](#formatting-dates-via-code)
   - [Formatting dates with DfValueConverter](#formatting-dates-with-dfvalueconverter)
-  - [ValueConverter Date Examples](#valueconverter-date-examples)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
