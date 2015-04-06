@@ -14,7 +14,6 @@ export class RelativeTime {
         for(let subkey in translation) {
           translation[subkey] = translation[subkey].replace('__count__', options.interpolationPrefix + 'count' + options.interpolationSuffix);
         }
-        console.log(translation);
       }
 
       this.service.i18next.addResources(key, 'translation', translation);

@@ -1,6 +1,27 @@
 "use strict";
 
 module.exports = {
+  ar: {
+    translation: {
+      now: "الآن",
+      second_ago: "منذ __count__ ثانية",
+      second_ago_plural: "منذ __count__ ثواني",
+      second_in: "في __count__ ثانية",
+      second_in_plural: "في __count__ ثواني",
+      minute_ago: "منذ __count__ دقيقة",
+      minute_ago_plural: "منذ __count__ دقائق",
+      minute_in: "في __count__ دقيقة",
+      minute_in_plural: "في __count__ دقائق",
+      hour_ago: "منذ __count__ ساعة",
+      hour_ago_plural: "منذ __count__ ساعات",
+      hour_in: "في __count__ ساعة",
+      hour_in_plural: "في __count__ ساعات",
+      day_ago: "منذ __count__ يوم",
+      day_ago_plural: "منذ __count__ أيام",
+      day_in: "في __count__ يوم",
+      day_in_plural: "في __count__ أيام"
+    }
+  },
   en: {
     translation: {
       now: "just now",

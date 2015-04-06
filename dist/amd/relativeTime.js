@@ -27,7 +27,6 @@ define(["exports", "./i18n", "./defaultTranslations/relative.time"], function (e
           for (var subkey in translation) {
             translation[subkey] = translation[subkey].replace("__count__", options.interpolationPrefix + "count" + options.interpolationSuffix);
           }
-          console.log(translation);
         }
 
         _this.service.i18next.addResources(key, "translation", translation);
