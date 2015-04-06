@@ -1,4 +1,4 @@
-define(["exports", "./i18n"], function (exports, _i18n) {
+define(["exports", "./i18n", "./relativeTime"], function (exports, _i18n, _relativeTime) {
   "use strict";
 
   exports.install = install;
@@ -7,6 +7,7 @@ define(["exports", "./i18n"], function (exports, _i18n) {
   });
   var I18N = _i18n.I18N;
   exports.I18N = _i18n.I18N;
+  exports.RelativeTime = _relativeTime.RelativeTime;
 
   function install(aurelia, cb) {
     aurelia.globalizeResources("./t");

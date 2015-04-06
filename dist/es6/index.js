@@ -1,5 +1,6 @@
 import {I18N} from './i18n';
 export {I18N} from './i18n';
+export {RelativeTime} from './relativeTime';
 
 export function install(aurelia, cb){
   aurelia.globalizeResources('./t');

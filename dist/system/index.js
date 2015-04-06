@@ -1,4 +1,4 @@
-System.register(["./i18n"], function (_export) {
+System.register(["./i18n", "./relativeTime"], function (_export) {
   var I18N;
 
   _export("install", install);
@@ -18,6 +18,8 @@ System.register(["./i18n"], function (_export) {
       I18N = _i18n.I18N;
 
       _export("I18N", _i18n.I18N);
+    }, function (_relativeTime) {
+      _export("RelativeTime", _relativeTime.RelativeTime);
     }],
     execute: function () {
       "use strict";
