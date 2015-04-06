@@ -124,5 +124,27 @@ export default {
        "day_in": "om __count__ dag",
        "day_in_plural": "om __count__ dagar"
     }
+  },
+  da: {
+    translation: {
+      "now": "lige nu",
+      "second_ago": "__count__ sekunder siden",
+       "second_ago_plural": "__count__ sekunder siden",
+       "second_in": "om __count__ sekund",
+       "second_in_plural": "om __count__ sekunder",
+       "minute_ago": "__count__ minut siden",
+       "minute_ago_plural": "__count__ minutter siden",
+       "minute_in": "om __count__ minut",
+       "minute_in_plural": "om __count__ minutter",
+       "hour_ago": "__count__ time siden",
+       "hour_ago_plural": "__count__ timer siden",
+       "hour_in": "om __count__ time",
+       "hour_in_plural": "om __count__ timer",
+       "day_ago": "__count__ dag siden",
+       "day_ago_plural": "__count__ dage siden",
+       "day_in": "om __count__ dag",
+       "day_in_plural": "om __count__ dage"
+    }
   }
 };
+
