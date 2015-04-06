@@ -20,7 +20,17 @@ define(["exports", "./i18n", "./defaultTranslations/relative.time"], function (e
       this.service = i18n;
 
       Object.keys(translations["default"]).map(function (key) {
-        _this.service.i18next.addResources(key, "translation", translations["default"][key].translation);
+        var translation = translations["default"][key].translation;
+        var options = i18n.i18next.options;
+
+        if (options.interpolationPrefix !== "__" || options.interpolationSuffix !== "__") {
+          for (var subkey in translation) {
+            translation[subkey] = translation[subkey].replace("__count__", options.interpolationPrefix + "count" + options.interpolationSuffix);
+          }
+          console.log(translation);
+        }
+
+        _this.service.i18next.addResources(key, "translation", translation);
       });
     }
 

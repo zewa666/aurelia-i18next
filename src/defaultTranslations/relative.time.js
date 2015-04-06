@@ -1,4 +1,4 @@
-export default {
+﻿export default {
   en: {
     translation: {
       "now": "just now",

@@ -68,4 +68,24 @@ describe('testing relative time support', () => {
       });
     });
   });
+
+  it('should respect interpolation settings', () => {
+    var customInterpolationSettings = new I18N();
+    customInterpolationSettings.setup({
+      lng : 'en',
+      getAsync : false,
+      sendMissing : false,
+      fallbackLng : 'en',
+      debug : false,
+      interpolationPrefix: '${',
+      interpolationSuffix: '}'
+    });
+
+    var customSut = new RelativeTime(customInterpolationSettings);
+
+    var expectedDate = new Date();
+    expectedDate.setHours(new Date().getHours() - 1);
+
+    expect(customSut.getRelativeTime(expectedDate)).toBe('1 hour ago');
+  });
 });

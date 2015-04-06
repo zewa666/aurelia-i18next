@@ -7,7 +7,17 @@ export class RelativeTime {
     this.service = i18n;
 
     Object.keys(translations.default).map( (key) => {
-      this.service.i18next.addResources(key, 'translation', translations.default[key]['translation']);
+      let translation = translations.default[key]['translation'];
+      let options = i18n.i18next.options;
+
+      if(options.interpolationPrefix !== '__' || options.interpolationSuffix !== '__') {
+        for(let subkey in translation) {
+          translation[subkey] = translation[subkey].replace('__count__', options.interpolationPrefix + 'count' + options.interpolationSuffix);
+        }
+        console.log(translation);
+      }
+
+      this.service.i18next.addResources(key, 'translation', translation);
     });
   }
 
