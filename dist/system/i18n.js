@@ -76,7 +76,9 @@ System.register(["i18next"], function (_export) {
             value: function assignObjectToKeys(root, obj) {
               var _this = this;
 
-              var opts = {};
+              if (obj === undefined) {
+                return undefined;
+              }var opts = {};
 
               Object.keys(obj).map(function (key) {
                 if (typeof obj[key] === "object") {

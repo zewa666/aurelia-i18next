@@ -52,6 +52,9 @@ export class I18N {
   };
 
   assignObjectToKeys(root, obj) {
+    if(obj === undefined)
+      return undefined;
+
     var opts = {};
 
     Object.keys(obj).map( (key) => {

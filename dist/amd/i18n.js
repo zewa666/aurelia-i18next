@@ -77,7 +77,9 @@ define(["exports", "i18next"], function (exports, _i18next) {
         value: function assignObjectToKeys(root, obj) {
           var _this = this;
 
-          var opts = {};
+          if (obj === undefined) {
+            return undefined;
+          }var opts = {};
 
           Object.keys(obj).map(function (key) {
             if (typeof obj[key] === "object") {
