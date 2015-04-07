@@ -19,6 +19,8 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
   - [Formatting numbers with NfValueConverter](#formatting-numbers-with-nfvalueconverter)  
   - [Formatting dates via code](#formatting-dates-via-code)
   - [Formatting dates with DfValueConverter](#formatting-dates-with-dfvalueconverter)
+  - [Rendering relative time](#rendering-relative-time)
+  
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
