@@ -15,6 +15,7 @@ function install(aurelia, cb) {
   aurelia.globalizeResources("./t");
   aurelia.globalizeResources("./nf");
   aurelia.globalizeResources("./df");
+  aurelia.globalizeResources("./rt");
   var instance = new I18N();
   aurelia.container.registerInstance(I18N, instance);
 
