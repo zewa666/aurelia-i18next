@@ -10,6 +10,10 @@ define(["exports", "./i18n", "./relativeTime"], function (exports, _i18n, _relat
   exports.RelativeTime = _relativeTime.RelativeTime;
 
   function install(aurelia, cb) {
+    if (cb === undefined || typeof cb !== "function") {
+      throw "You need to provide a callback method to properly configure the library";
+    }
+
     aurelia.globalizeResources("./t");
     aurelia.globalizeResources("./nf");
     aurelia.globalizeResources("./df");
