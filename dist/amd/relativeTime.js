@@ -39,15 +39,21 @@ define(["exports", "./i18n", "./defaultTranslations/relative.time"], function (e
           var now = new Date();
           var diff = now.getTime() - time.getTime();
 
-          var timeDiff = this.getTimeDiffDescription(diff, "day", 86400000);
+          var timeDiff = this.getTimeDiffDescription(diff, "year", 31104000000);
           if (!timeDiff) {
-            timeDiff = this.getTimeDiffDescription(diff, "hour", 3600000);
+            var timeDiff = this.getTimeDiffDescription(diff, "month", 2592000000);
             if (!timeDiff) {
-              timeDiff = this.getTimeDiffDescription(diff, "minute", 60000);
+              var timeDiff = this.getTimeDiffDescription(diff, "day", 86400000);
               if (!timeDiff) {
-                timeDiff = this.getTimeDiffDescription(diff, "second", 1000);
+                timeDiff = this.getTimeDiffDescription(diff, "hour", 3600000);
                 if (!timeDiff) {
-                  timeDiff = this.service.tr("now");
+                  timeDiff = this.getTimeDiffDescription(diff, "minute", 60000);
+                  if (!timeDiff) {
+                    timeDiff = this.getTimeDiffDescription(diff, "second", 1000);
+                    if (!timeDiff) {
+                      timeDiff = this.service.tr("now");
+                    }
+                  }
                 }
               }
             }

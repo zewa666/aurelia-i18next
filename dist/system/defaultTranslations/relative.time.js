@@ -44,7 +44,15 @@ System.register([], function (_export) {
             day_ago: "__count__ day ago",
             day_ago_plural: "__count__ days ago",
             day_in: "in __count__ day",
-            day_in_plural: "in __count__ days"
+            day_in_plural: "in __count__ days",
+            month_ago: "__count__ month ago",
+            month_ago_plural: "__count__ months ago",
+            month_in: "in __count__ month",
+            month_in_plural: "in __count__ months",
+            year_ago: "__count__ year ago",
+            year_ago_plural: "__count__ years ago",
+            year_in: "in __count__ year",
+            year_in_plural: "in __count__ years"
           }
         },
         de: {
@@ -65,7 +73,15 @@ System.register([], function (_export) {
             day_ago: "vor __count__ Tag",
             day_ago_plural: "vor __count__ Tagen",
             day_in: "in __count__ Tag",
-            day_in_plural: "in __count__ Tagen"
+            day_in_plural: "in __count__ Tagen",
+            month_ago: "vor __count__ Monat",
+            month_ago_plural: "vor __count__ Monaten",
+            month_in: "in __count__ Monat",
+            month_in_plural: "in __count__ Monaten",
+            year_ago: "vor __count__ Jahr",
+            year_ago_plural: "vor __count__ Jahren",
+            year_in: "in __count__ Jahr",
+            year_in_plural: "in __count__ Jahren"
           }
         },
         nl: {

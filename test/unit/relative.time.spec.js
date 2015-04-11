@@ -38,6 +38,20 @@ describe('testing relative time support', () => {
 
       expect(sut.getRelativeTime(expectedDate)).toBe('2 hours ago');
     });
+
+    it('should provide month ranges', () => {
+      var expectedDate = new Date();
+      expectedDate.setMonth(new Date().getMonth() - 2);
+
+      expect(sut.getRelativeTime(expectedDate)).toBe('2 months ago');
+    });
+
+    it('should provide year ranges', () => {
+      var expectedDate = new Date();
+      expectedDate.setFullYear(new Date().getFullYear() - 2);
+
+      expect(sut.getRelativeTime(expectedDate)).toBe('2 years ago');
+    });
   });
 
   describe('in tests', () => {
@@ -55,6 +69,19 @@ describe('testing relative time support', () => {
       expect(sut.getRelativeTime(expectedDate)).toBe('in 2 hours');
     });
 
+    it('should provide month ranges', () => {
+      var expectedDate = new Date();
+      expectedDate.setMonth(new Date().getMonth() + 2);
+
+      expect(sut.getRelativeTime(expectedDate)).toBe('in 2 months');
+    });
+
+    it('should provide year ranges', () => {
+      var expectedDate = new Date();
+      expectedDate.setFullYear(new Date().getFullYear() + 2);
+
+      expect(sut.getRelativeTime(expectedDate)).toBe('in 2 years');
+    });
   });
 
   describe('test i18n support', () => {
