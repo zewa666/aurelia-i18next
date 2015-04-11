@@ -15,7 +15,7 @@ System.register(["./i18n", "./relativeTime"], function (_export) {
     var instance = new I18N();
     aurelia.container.registerInstance(I18N, instance);
 
-    cb(instance);
+    return cb(instance);
   }
 
   return {

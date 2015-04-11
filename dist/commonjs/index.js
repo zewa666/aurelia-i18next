@@ -23,5 +23,5 @@ function install(aurelia, cb) {
   var instance = new I18N();
   aurelia.container.registerInstance(I18N, instance);
 
-  cb(instance);
+  return cb(instance);
 }
