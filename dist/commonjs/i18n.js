@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var i18n = _interopRequire(require("i18next"));
 
+var assignObjectToKeys = require("./utils").assignObjectToKeys;
+
 var I18N = exports.I18N = (function () {
   function I18N() {
     _classCallCheck(this, I18N);
@@ -66,34 +68,9 @@ var I18N = exports.I18N = (function () {
         return new this.Intl.DateTimeFormat(locales || this.getLocale(), options);
       }
     },
-    extend: {
-      value: function extend(destination, source) {
-        for (var property in source) destination[property] = source[property];
-        return destination;
-      }
-    },
-    assignObjectToKeys: {
-      value: function assignObjectToKeys(root, obj) {
-        var _this = this;
-
-        if (obj === undefined) {
-          return undefined;
-        }var opts = {};
-
-        Object.keys(obj).map(function (key) {
-          if (typeof obj[key] === "object") {
-            _this.extend(opts, _this.assignObjectToKeys(key, obj[key]));
-          } else {
-            opts[root !== "" ? root + "." + key : key] = obj[key];
-          }
-        });
-
-        return opts;
-      }
-    },
     tr: {
       value: function tr(key, options) {
-        return this.i18next.t(key, this.assignObjectToKeys("", options));
+        return this.i18next.t(key, assignObjectToKeys("", options));
       }
     }
   });

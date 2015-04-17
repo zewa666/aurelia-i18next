@@ -1,4 +1,5 @@
 import i18n from 'i18next';
+import {assignObjectToKeys} from './utils';
 
 export class I18N {
 
@@ -45,30 +46,7 @@ export class I18N {
     return new this.Intl.DateTimeFormat(locales || this.getLocale(), options);
   }
 
-  extend(destination,source) {
-    for (var property in source)
-      destination[property] = source[property];
-    return destination;
-  };
-
-  assignObjectToKeys(root, obj) {
-    if(obj === undefined)
-      return undefined;
-
-    var opts = {};
-
-    Object.keys(obj).map( (key) => {
-      if(typeof obj[key] === 'object') {
-        this.extend(opts, this.assignObjectToKeys(key, obj[key]));
-      } else {
-        opts[root !== '' ? root + '.' + key : key] = obj[key];
-      }
-    });
-
-    return opts;
-  }
-
   tr(key, options) {
-    return this.i18next.t(key, this.assignObjectToKeys('', options));
+    return this.i18next.t(key, assignObjectToKeys('', options));
   }
 }

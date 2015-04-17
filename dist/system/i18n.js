@@ -1,9 +1,11 @@
-System.register(["i18next"], function (_export) {
-  var i18n, _createClass, _classCallCheck, I18N;
+System.register(["i18next", "./utils"], function (_export) {
+  var i18n, assignObjectToKeys, _createClass, _classCallCheck, I18N;
 
   return {
     setters: [function (_i18next) {
       i18n = _i18next["default"];
+    }, function (_utils) {
+      assignObjectToKeys = _utils.assignObjectToKeys;
     }],
     execute: function () {
       "use strict";
@@ -66,34 +68,9 @@ System.register(["i18next"], function (_export) {
               return new this.Intl.DateTimeFormat(locales || this.getLocale(), options);
             }
           },
-          extend: {
-            value: function extend(destination, source) {
-              for (var property in source) destination[property] = source[property];
-              return destination;
-            }
-          },
-          assignObjectToKeys: {
-            value: function assignObjectToKeys(root, obj) {
-              var _this = this;
-
-              if (obj === undefined) {
-                return undefined;
-              }var opts = {};
-
-              Object.keys(obj).map(function (key) {
-                if (typeof obj[key] === "object") {
-                  _this.extend(opts, _this.assignObjectToKeys(key, obj[key]));
-                } else {
-                  opts[root !== "" ? root + "." + key : key] = obj[key];
-                }
-              });
-
-              return opts;
-            }
-          },
           tr: {
             value: function tr(key, options) {
-              return this.i18next.t(key, this.assignObjectToKeys("", options));
+              return this.i18next.t(key, assignObjectToKeys("", options));
             }
           }
         });

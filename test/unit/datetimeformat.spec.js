@@ -54,7 +54,7 @@ describe('datetimeformat tests', () => {
     var df = sut.df(options, 'de');
     var testDate = new Date(2000, 0, 1, 0,0,1);
 
-    expect(df.format(testDate)).toEqual('01.01.2000 00:00:01');
+    expect(df.format(testDate)).toEqual('01.01.2000, 00:00:01');
   });
 
 });

@@ -1,4 +1,4 @@
-define(["exports", "i18next"], function (exports, _i18next) {
+define(["exports", "i18next", "./utils"], function (exports, _i18next, _utils) {
   "use strict";
 
   var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -12,6 +12,8 @@ define(["exports", "i18next"], function (exports, _i18next) {
   });
 
   var i18n = _interopRequire(_i18next);
+
+  var assignObjectToKeys = _utils.assignObjectToKeys;
 
   var I18N = exports.I18N = (function () {
     function I18N() {
@@ -67,34 +69,9 @@ define(["exports", "i18next"], function (exports, _i18next) {
           return new this.Intl.DateTimeFormat(locales || this.getLocale(), options);
         }
       },
-      extend: {
-        value: function extend(destination, source) {
-          for (var property in source) destination[property] = source[property];
-          return destination;
-        }
-      },
-      assignObjectToKeys: {
-        value: function assignObjectToKeys(root, obj) {
-          var _this = this;
-
-          if (obj === undefined) {
-            return undefined;
-          }var opts = {};
-
-          Object.keys(obj).map(function (key) {
-            if (typeof obj[key] === "object") {
-              _this.extend(opts, _this.assignObjectToKeys(key, obj[key]));
-            } else {
-              opts[root !== "" ? root + "." + key : key] = obj[key];
-            }
-          });
-
-          return opts;
-        }
-      },
       tr: {
         value: function tr(key, options) {
-          return this.i18next.t(key, this.assignObjectToKeys("", options));
+          return this.i18next.t(key, assignObjectToKeys("", options));
         }
       }
     });
