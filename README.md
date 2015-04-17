@@ -29,7 +29,7 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
 1. In your project install the plugin via `jspm` with following command
 
   ```shell
-  jspm install aurelia-i18next
+  jspm install github:zewa666/aurelia-i18next
   ```
 2. Make sure you use [manual bootstrapping](http://aurelia.io/docs#startup-and-configuration). In order to do so open your `index.html` and locate the element with the attribute aurelia-app. Change it to look like this:
 
