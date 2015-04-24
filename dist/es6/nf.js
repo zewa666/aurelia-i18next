@@ -6,7 +6,7 @@ export class NfValueConverter {
     this.service = i18n;
   }
 
-  toView(value, locale, formatOptions, numberFormat) {
+  toView(value, formatOptions, locale, numberFormat) {
     var nf = numberFormat || this.service.nf(formatOptions, locale || this.service.getLocale());
 
     return nf.format(value);

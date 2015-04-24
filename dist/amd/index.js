@@ -1,25 +1,34 @@
-define(["exports", "./i18n", "./relativeTime"], function (exports, _i18n, _relativeTime) {
-  "use strict";
+define(['exports', './i18n', './relativeTime'], function (exports, _i18n, _relativeTime) {
+  'use strict';
 
-  exports.install = install;
-  Object.defineProperty(exports, "__esModule", {
+  Object.defineProperty(exports, '__esModule', {
     value: true
   });
-  var I18N = _i18n.I18N;
-  exports.I18N = _i18n.I18N;
-  exports.RelativeTime = _relativeTime.RelativeTime;
+  exports.install = install;
+  Object.defineProperty(exports, 'I18N', {
+    enumerable: true,
+    get: function get() {
+      return _i18n.I18N;
+    }
+  });
+  Object.defineProperty(exports, 'RelativeTime', {
+    enumerable: true,
+    get: function get() {
+      return _relativeTime.RelativeTime;
+    }
+  });
 
   function install(aurelia, cb) {
-    if (cb === undefined || typeof cb !== "function") {
-      throw "You need to provide a callback method to properly configure the library";
+    if (cb === undefined || typeof cb !== 'function') {
+      throw 'You need to provide a callback method to properly configure the library';
     }
 
-    aurelia.globalizeResources("./t");
-    aurelia.globalizeResources("./nf");
-    aurelia.globalizeResources("./df");
-    aurelia.globalizeResources("./rt");
-    var instance = new I18N();
-    aurelia.container.registerInstance(I18N, instance);
+    aurelia.globalizeResources('./t');
+    aurelia.globalizeResources('./nf');
+    aurelia.globalizeResources('./df');
+    aurelia.globalizeResources('./rt');
+    var instance = new _i18n.I18N();
+    aurelia.container.registerInstance(_i18n.I18N, instance);
 
     return cb(instance);
   }
