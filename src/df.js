@@ -6,7 +6,7 @@ export class DfValueConverter {
     this.service = i18n;
   }
 
-  toView(value, locale, formatOptions, dateFormat) {
+  toView(value, formatOptions, locale, dateFormat) {
     var df = dateFormat || this.service.df(formatOptions, locale || this.service.getLocale());
 
     return df.format(value);
