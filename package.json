@@ -1,6 +1,6 @@
 {
   "name": "aurelia-i18next",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "An Aurelia-Wrapper for the library i18next",
   "keywords": [
     "aurelia",
