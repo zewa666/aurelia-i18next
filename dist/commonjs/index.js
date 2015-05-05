@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports.install = install;
+exports.configure = configure;
 
 var _I18N = require('./i18n');
 
@@ -23,7 +23,7 @@ Object.defineProperty(exports, 'RelativeTime', {
   }
 });
 
-function install(aurelia, cb) {
+function configure(aurelia, cb) {
   if (cb === undefined || typeof cb !== 'function') {
     throw 'You need to provide a callback method to properly configure the library';
   }

@@ -4,7 +4,7 @@ define(['exports', './i18n', './relativeTime'], function (exports, _i18n, _relat
   Object.defineProperty(exports, '__esModule', {
     value: true
   });
-  exports.install = install;
+  exports.configure = configure;
   Object.defineProperty(exports, 'I18N', {
     enumerable: true,
     get: function get() {
@@ -18,7 +18,7 @@ define(['exports', './i18n', './relativeTime'], function (exports, _i18n, _relat
     }
   });
 
-  function install(aurelia, cb) {
+  function configure(aurelia, cb) {
     if (cb === undefined || typeof cb !== 'function') {
       throw 'You need to provide a callback method to properly configure the library';
     }

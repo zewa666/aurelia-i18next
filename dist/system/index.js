@@ -1,9 +1,9 @@
 System.register(['./i18n', './relativeTime'], function (_export) {
   var I18N;
 
-  _export('install', install);
+  _export('configure', configure);
 
-  function install(aurelia, cb) {
+  function configure(aurelia, cb) {
     if (cb === undefined || typeof cb !== 'function') {
       throw 'You need to provide a callback method to properly configure the library';
     }
