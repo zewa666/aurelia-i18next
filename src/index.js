@@ -2,7 +2,7 @@ import {I18N} from './i18n';
 export {I18N} from './i18n';
 export {RelativeTime} from './relativeTime';
 
-export function install(aurelia, cb){
+export function configure(aurelia, cb){
   if(cb === undefined || typeof cb !== 'function') {
     throw 'You need to provide a callback method to properly configure the library';
   }

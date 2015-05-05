@@ -1,7 +1,7 @@
-import {install} from '../../src/index';
+import {configure} from '../../src/index';
 
 
-describe('testing aurelia install routine', () => {
+describe('testing aurelia configure routine', () => {
 
   var aurelia = {
     globalizeResources: () => {
@@ -14,8 +14,8 @@ describe('testing aurelia install routine', () => {
     }
   };
 
-  it('should export install function', () => {
-    expect(typeof install).toBe('function');
+  it('should export configure function', () => {
+    expect(typeof configure).toBe('function');
   });
 
   it('should accept a setup callback passing back the instance', (done) => {
@@ -26,10 +26,10 @@ describe('testing aurelia install routine', () => {
       done();
     };
 
-    install(aurelia, cb);
+    configure(aurelia, cb);
   });
 
   it('should throw custom error message if no callback is provided', () => {
-    expect(() => { install(aurelia); }).toThrow('You need to provide a callback method to properly configure the library');
+    expect(() => { configure(aurelia); }).toThrow('You need to provide a callback method to properly configure the library');
   });
 });
