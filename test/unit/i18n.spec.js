@@ -16,7 +16,8 @@ describe('testing i18n translations', () => {
           "friend": "A friend",
           "friend_male": "A boyfriend",
           "friend_female": "A girlfriend",
-          "complex": '__field__ should be between __threshold.min__ and __threshold.max__'
+          "complex": '__field__ should be between __threshold.min__ and __threshold.max__',
+          "nested_referencing": '$t(lives) in round __round__'
         }
       },
       de: {
@@ -74,5 +75,9 @@ describe('testing i18n translations', () => {
     };
 
     expect(sut.tr('complex', options)).toEqual('Age should be between 1 and 10');
+  });
+
+  it('should support nested translations', () => {
+    expect(sut.tr('nested_referencing', { count: 1, round: 1 })).toEqual('1 life remaining in round 1');
   });
 });
