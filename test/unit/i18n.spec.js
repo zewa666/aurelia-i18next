@@ -1,4 +1,5 @@
 import {I18N} from '../../src/i18n';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 describe('testing i18n translations', () => {
 
@@ -34,7 +35,7 @@ describe('testing i18n translations', () => {
       }
     };
 
-    sut = new I18N();
+    sut = new I18N(new EventAggregator());
     sut.setup({
       resStore: resources,
       lng : 'en',

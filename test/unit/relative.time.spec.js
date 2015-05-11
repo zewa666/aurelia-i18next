@@ -1,12 +1,13 @@
 import {I18N} from '../../src/i18n';
 import {RelativeTime} from '../../src/relativeTime';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 describe('testing relative time support', () => {
 
   var sut, i18n;
 
   beforeEach( () => {
-    i18n = new I18N();
+    i18n = new I18N(new EventAggregator());
     i18n.setup({
       lng : 'en',
       getAsync : false,

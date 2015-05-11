@@ -17,10 +17,11 @@ var _i18n2 = _interopRequireWildcard(_i18n);
 var _assignObjectToKeys = require('./utils');
 
 var I18N = (function () {
-  function I18N() {
+  function I18N(ea) {
     _classCallCheck(this, I18N);
 
     this.i18next = _i18n2['default'];
+    this.ea = ea;
     this.Intl = window.Intl;
 
     if (window.Intl === undefined) {
@@ -50,7 +51,10 @@ var I18N = (function () {
       var _this = this;
 
       return new Promise(function (resolve) {
-        _this.i18next.setLng(locale, resolve);
+        _this.i18next.setLng(locale, function (tr) {
+          _this.ea.publish('i18n:locale:changed');
+          resolve(tr);
+        });
       });
     }
   }, {

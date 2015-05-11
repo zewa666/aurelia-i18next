@@ -7,6 +7,8 @@ exports.configure = configure;
 
 var _I18N = require('./i18n');
 
+var _EventAggregator = require('aurelia-event-aggregator');
+
 Object.defineProperty(exports, 'I18N', {
   enumerable: true,
   get: function get() {
@@ -32,7 +34,7 @@ function configure(aurelia, cb) {
   aurelia.globalizeResources('./nf');
   aurelia.globalizeResources('./df');
   aurelia.globalizeResources('./rt');
-  var instance = new _I18N.I18N();
+  var instance = new _I18N.I18N(aurelia.container.get(_EventAggregator.EventAggregator));
   aurelia.container.registerInstance(_I18N.I18N, instance);
 
   return cb(instance);

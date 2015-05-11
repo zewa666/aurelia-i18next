@@ -14,10 +14,11 @@ define(['exports', 'i18next', './utils'], function (exports, _i18next, _utils) {
   var _i18n = _interopRequire(_i18next);
 
   var I18N = (function () {
-    function I18N() {
+    function I18N(ea) {
       _classCallCheck(this, I18N);
 
       this.i18next = _i18n;
+      this.ea = ea;
       this.Intl = window.Intl;
 
       if (window.Intl === undefined) {
@@ -47,7 +48,10 @@ define(['exports', 'i18next', './utils'], function (exports, _i18next, _utils) {
         var _this = this;
 
         return new Promise(function (resolve) {
-          _this.i18next.setLng(locale, resolve);
+          _this.i18next.setLng(locale, function (tr) {
+            _this.ea.publish('i18n:locale:changed');
+            resolve(tr);
+          });
         });
       }
     }, {

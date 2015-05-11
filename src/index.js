@@ -1,4 +1,5 @@
 import {I18N} from './i18n';
+export {I18N} from './i18n';
 export {RelativeTime} from './relativeTime';
 import {EventAggregator} from 'aurelia-event-aggregator';
 

@@ -1,11 +1,12 @@
 import {I18N} from '../../src/i18n';
 import {NfValueConverter} from '../../src/nf';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 describe('nfvalueconverter tests', () => {
   
   var sut, nfvc;
   beforeEach(function() {
-    sut = new I18N();
+    sut = new I18N(new EventAggregator());
     nfvc = new NfValueConverter(sut);
   });
 
