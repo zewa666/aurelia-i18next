@@ -1,6 +1,7 @@
 import {I18N} from './i18n';
 export {I18N} from './i18n';
 export {RelativeTime} from './relativeTime';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 export function configure(aurelia, cb){
   if(cb === undefined || typeof cb !== 'function') {
@@ -11,7 +12,7 @@ export function configure(aurelia, cb){
   aurelia.globalizeResources('./nf');
   aurelia.globalizeResources('./df');
   aurelia.globalizeResources('./rt');
-  var instance = new I18N();
+  var instance = new I18N(aurelia.container.get(EventAggregator));
   aurelia.container.registerInstance(I18N, instance);
 
   return cb(instance);

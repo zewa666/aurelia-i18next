@@ -1,4 +1,4 @@
-define(['exports', './i18n', './relativeTime'], function (exports, _i18n, _relativeTime) {
+define(['exports', './i18n', 'aurelia-event-aggregator', './relativeTime'], function (exports, _i18n, _aureliaEventAggregator, _relativeTime) {
   'use strict';
 
   Object.defineProperty(exports, '__esModule', {
@@ -27,7 +27,7 @@ define(['exports', './i18n', './relativeTime'], function (exports, _i18n, _relat
     aurelia.globalizeResources('./nf');
     aurelia.globalizeResources('./df');
     aurelia.globalizeResources('./rt');
-    var instance = new _i18n.I18N();
+    var instance = new _i18n.I18N(aurelia.container.get(_aureliaEventAggregator.EventAggregator));
     aurelia.container.registerInstance(_i18n.I18N, instance);
 
     return cb(instance);

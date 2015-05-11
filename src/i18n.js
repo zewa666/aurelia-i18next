@@ -3,8 +3,9 @@ import {assignObjectToKeys} from './utils';
 
 export class I18N {
 
-  constructor() {
+  constructor(ea) {
     this.i18next = i18n;
+    this.ea = ea;
     this.Intl = window.Intl;
 
     // check whether Intl is available, otherwise load the polyfill
@@ -29,8 +30,11 @@ export class I18N {
   }
 
   setLocale(locale) {
-    return new Promise( (resolve) => {
-      this.i18next.setLng(locale, resolve);
+    return new Promise( resolve => {
+      this.i18next.setLng(locale, tr=>{
+        this.ea.publish("i18n:locale:changed");
+        resolve(tr);
+      });
     });
   }
 

@@ -1,4 +1,5 @@
 import {I18N} from '../../src/i18n';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 describe('feature verification placeholders', () => {
 
@@ -15,7 +16,7 @@ describe('feature verification placeholders', () => {
       }
     };
 
-    sut = new I18N();
+    sut = new I18N(new EventAggregator());
     sut.setup({
       resStore: resources,
       lng : 'en',

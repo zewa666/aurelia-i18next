@@ -1,6 +1,5 @@
 import {configure} from '../../src/index';
 
-
 describe('testing aurelia configure routine', () => {
 
   var aurelia = {
@@ -10,7 +9,8 @@ describe('testing aurelia configure routine', () => {
     container: {
       registerInstance: (type, instance) => {
 
-      }
+      },
+      get: (type) => { return new type(); }
     }
   };
 
@@ -30,6 +30,7 @@ describe('testing aurelia configure routine', () => {
   });
 
   it('should throw custom error message if no callback is provided', () => {
-    expect(() => { configure(aurelia); }).toThrow('You need to provide a callback method to properly configure the library');
+    expect(() => { configure(aurelia); })
+      .toThrow('You need to provide a callback method to properly configure the library');
   });
 });

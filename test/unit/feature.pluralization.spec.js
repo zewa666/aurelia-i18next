@@ -1,4 +1,5 @@
 import {I18N} from '../../src/i18n';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 describe('feature verification pluralization', () => {
 
@@ -11,12 +12,12 @@ describe('feature verification pluralization', () => {
           "lives": "__count__ life remaining",
           "lives_plural": "__count__ lives remaining",
           "lives_indefinite": "a life remaining",
-          "lives_plural_indefinite": "some lives remaining",
+          "lives_plural_indefinite": "some lives remaining"
         }
       }
     };
 
-    sut = new I18N();
+    sut = new I18N(new EventAggregator());
     sut.setup({
       resStore: resources,
       lng : 'en',

@@ -1,13 +1,14 @@
 import {I18N} from '../../src/i18n';
-import {DfValueConverter} from '../../src/df'
+import {DfValueConverter} from '../../src/df';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 describe('dfvalueconverter tests', () => {
 
   var sut, dfvc;
 
   beforeEach(() => {
-    sut = new I18N();
-     dfvc = new DfValueConverter(sut);
+    sut = new I18N(new EventAggregator());
+    dfvc = new DfValueConverter(sut);
   });
 
   it('should display only the date in the setup locale format by default', () => {

@@ -15,10 +15,11 @@ System.register(['i18next', './utils'], function (_export) {
       _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
       I18N = (function () {
-        function I18N() {
+        function I18N(ea) {
           _classCallCheck(this, I18N);
 
           this.i18next = i18n;
+          this.ea = ea;
           this.Intl = window.Intl;
 
           if (window.Intl === undefined) {
@@ -48,7 +49,10 @@ System.register(['i18next', './utils'], function (_export) {
             var _this = this;
 
             return new Promise(function (resolve) {
-              _this.i18next.setLng(locale, resolve);
+              _this.i18next.setLng(locale, function (tr) {
+                _this.ea.publish('i18n:locale:changed');
+                resolve(tr);
+              });
             });
           }
         }, {
