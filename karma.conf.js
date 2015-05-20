@@ -14,12 +14,15 @@ module.exports = function(config) {
 
     jspm: {
       // Edit this to your needs
-      loadFiles: ['src/**/*.js', 'test/unit/**/*.js']
+      loadFiles: ['test/unit/**/*.js'],
+      serveFiles : ['src/**/*.js','test/unit/fixtures/**/*']
     },
 
 
     // list of files / patterns to load in the browser
-    files: [],
+    files: [
+      {pattern: 'test/unit/fixtures/**/*.html', included: false}
+    ],
 
 
     // list of files to exclude
