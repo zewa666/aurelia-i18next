@@ -28,8 +28,11 @@ export class I18N {
     };
 
     i18n.init(options || defaultOptions);
+
     //make sure attributes is an array in case a string was provided
-    if(i18n.options.attributes instanceof String) i18n.options.attributes = [i18n.options.attributes];
+    if(i18n.options.attributes instanceof String) {
+      i18n.options.attributes = [i18n.options.attributes];
+    }
   }
 
   setLocale(locale) {
@@ -132,7 +135,6 @@ export class I18N {
             node.setAttribute(attr, this.tr(key));
             break;
         }
-
       }
     }
   }

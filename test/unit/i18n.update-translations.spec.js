@@ -3,22 +3,23 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 
 describe('testing i18n translation update', () => {
 
-  let sut,loader,template,ea;
-  
-  beforeEach( (done) => {
+  let sut, resources, template, ea;
+
+  beforeEach((done) => {
 
     System.config({
       "paths": {
         "*": "test/unit/fixtures/*.js"
       }
     });
-    
-    var resources = {
+
+    resources = {
       en: {
         translation: {
           "title": "Title",
           "description": "Description",
           "description2": "Description <b>with some bold</b>",
+          "nested_referencing": 'The $t(title) is the header',
           "description-class": "red",
           "testimage": "testimage-english.jpg"
         }
@@ -28,39 +29,68 @@ describe('testing i18n translation update', () => {
           "title": "Titel",
           "description": "Beschreibung",
           "description2": "Beschreibung <b>mit Fettdruck</b>",
+          "nested_referencing": 'Der $t(title) ist der Kopf',
           "description-class": "blue",
           "testimage": "testimage-german.jpg"
         }
       }
     };
-    
-    ea = new EventAggregator();
+
+    ea  = new EventAggregator();
     sut = new I18N(ea);
     sut.setup({
       resStore: resources,
-      lng : 'en',
-      attributes : ['t','data-i18n'],
-      getAsync : false,
-      sendMissing : false,
-      fallbackLng : 'en',
-      debug : false
+      lng: 'en',
+      attributes: ['t', 'data-i18n'],
+      getAsync: false,
+      sendMissing: false,
+      fallbackLng: 'en',
+      debug: false
     });
 
     //load the the html fixture
     System.import('template.html!text').then((result) => {
-      template = document.createElement("div");
+      template           = document.createElement("div");
       template.innerHTML = result;
-      if(template.firstChild instanceof HTMLTemplateElement) template.innerHTML = template.firstChild.innerHTML;
+      if (template.firstChild instanceof HTMLTemplateElement) template.innerHTML = template.firstChild.innerHTML;
       document.body.appendChild(template);
       done();
     });
 
     //update the translations in the template when the locale changes
-    ea.subscribe('i18n:locale:changed', payload=>{
+    ea.subscribe('i18n:locale:changed', payload => {
       sut.updateTranslations(template);
     });
   });
-  
+
+
+  it('should not update translations if no attributes defined in options', (done) => {
+    ea  = new EventAggregator();
+    sut = new I18N(ea);
+    sut.setup({
+      resStore: resources,
+      lng: 'en',
+      getAsync: false,
+      sendMissing: false,
+      fallbackLng: 'en',
+      debug: false
+    });
+
+    //load the the html fixture
+    System.import('template.html!text').then((result) => {
+      template           = document.createElement("div");
+      template.innerHTML = result;
+      if (template.firstChild instanceof HTMLTemplateElement) template.innerHTML = template.firstChild.innerHTML;
+      document.body.appendChild(template);
+      done();
+    });
+
+    expect(template.querySelector("#test1").innerHTML.trim()).toBe('Title');
+    expect(template.querySelector("#test2").innerHTML.trim()).toBe('Description');
+    sut.setLocale("de");
+    expect(template.querySelector("#test1").innerHTML.trim()).toBe('Title');
+    expect(template.querySelector("#test2").innerHTML.trim()).toBe('Description');
+  });
 
   it('should translate contents of elements with a translation attribute', () => {
     expect(template.querySelector("#test1").innerHTML.trim()).toBe('Title');
@@ -68,6 +98,12 @@ describe('testing i18n translation update', () => {
     sut.setLocale("de");
     expect(template.querySelector("#test1").innerHTML.trim()).toBe('Titel');
     expect(template.querySelector("#test2").innerHTML.trim()).toBe('Beschreibung');
+  });
+
+  it('should translate nested keys', () => {
+    expect(template.querySelector("#test-nested").innerHTML.trim()).toBe('Description Title');
+    sut.setLocale("de");
+    expect(template.querySelector("#test-nested").innerHTML.trim()).toBe('Der Titel ist der Kopf');
   });
 
   it('should work with all attributes specified in the options', () => {
@@ -136,5 +172,5 @@ describe('testing i18n translation update', () => {
     sut.setLocale("en");
     expect(el.getAttribute("src")).toBe('testimage-english.jpg');
   });
-  
+
 });

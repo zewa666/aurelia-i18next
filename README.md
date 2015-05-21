@@ -20,6 +20,7 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
   - [Formatting dates via code](#formatting-dates-via-code)
   - [Formatting dates with DfValueConverter](#formatting-dates-with-dfvalueconverter)
   - [Rendering relative time](#rendering-relative-time)
+- [Running the unit tests](#running-the-unit-tests)
   
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -380,4 +381,18 @@ A more declarative approach is to use the RtValueConverter directly in your HTML
     </li>
   </ul>
 </div>
+```
+
+## Running the unit tests
+
+In order to properly run the unit tests please install the defined jspm devDependencies by running the following command:
+
+```shell
+jspm install --dev
+```
+
+To start the tests just run:
+
+```shell
+karma start
 ```

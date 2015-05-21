@@ -21,9 +21,16 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: 'test/unit/fixtures/**/*.html', included: false}
+      {pattern: 'test/unit/fixtures/**/*.html', included: false},
+      // dont pre-load just serve if requested
+      {pattern: 'test/unit/fixtures/**/*.jpg', watched: false, included: false, served: true}
     ],
 
+    // proxy test images, map the same placeholder to different requests
+    proxies: {
+      '/testimage-english.jpg': '/base/test/unit/fixtures/placeholder.jpg',
+      '/testimage-german.jpg': '/base/test/unit/fixtures/placeholder.jpg'
+    },
 
     // list of files to exclude
     exclude: [

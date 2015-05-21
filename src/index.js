@@ -1,7 +1,8 @@
 import {I18N} from './i18n';
+import {EventAggregator} from 'aurelia-event-aggregator';
+
 export {I18N} from './i18n';
 export {RelativeTime} from './relativeTime';
-import {EventAggregator} from 'aurelia-event-aggregator';
 export {DfValueConverter} from './df';
 export {NfValueConverter} from './nf';
 export {RtValueConverter} from './rt';
