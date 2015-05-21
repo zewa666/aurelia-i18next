@@ -1,4 +1,4 @@
-System.register(['./i18n', 'aurelia-event-aggregator', './relativeTime'], function (_export) {
+System.register(['./i18n', 'aurelia-event-aggregator', './relativeTime', './df', './nf', './rt', './t'], function (_export) {
   var I18N, EventAggregator;
 
   _export('configure', configure);
@@ -27,6 +27,14 @@ System.register(['./i18n', 'aurelia-event-aggregator', './relativeTime'], functi
       EventAggregator = _aureliaEventAggregator.EventAggregator;
     }, function (_relativeTime) {
       _export('RelativeTime', _relativeTime.RelativeTime);
+    }, function (_df) {
+      _export('DfValueConverter', _df.DfValueConverter);
+    }, function (_nf) {
+      _export('NfValueConverter', _nf.NfValueConverter);
+    }, function (_rt) {
+      _export('RtValueConverter', _rt.RtValueConverter);
+    }, function (_t) {
+      _export('TValueConverter', _t.TValueConverter);
     }],
     execute: function () {
       'use strict';

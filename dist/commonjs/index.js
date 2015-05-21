@@ -25,6 +25,42 @@ Object.defineProperty(exports, 'RelativeTime', {
   }
 });
 
+var _DfValueConverter = require('./df');
+
+Object.defineProperty(exports, 'DfValueConverter', {
+  enumerable: true,
+  get: function get() {
+    return _DfValueConverter.DfValueConverter;
+  }
+});
+
+var _NfValueConverter = require('./nf');
+
+Object.defineProperty(exports, 'NfValueConverter', {
+  enumerable: true,
+  get: function get() {
+    return _NfValueConverter.NfValueConverter;
+  }
+});
+
+var _RtValueConverter = require('./rt');
+
+Object.defineProperty(exports, 'RtValueConverter', {
+  enumerable: true,
+  get: function get() {
+    return _RtValueConverter.RtValueConverter;
+  }
+});
+
+var _TValueConverter = require('./t');
+
+Object.defineProperty(exports, 'TValueConverter', {
+  enumerable: true,
+  get: function get() {
+    return _TValueConverter.TValueConverter;
+  }
+});
+
 function configure(aurelia, cb) {
   if (cb === undefined || typeof cb !== 'function') {
     throw 'You need to provide a callback method to properly configure the library';

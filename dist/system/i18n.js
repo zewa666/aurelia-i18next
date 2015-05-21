@@ -37,11 +37,16 @@ System.register(['i18next', './utils'], function (_export) {
               lng: 'en',
               getAsync: false,
               sendMissing: false,
+              attributes: ['t', 'i18n'],
               fallbackLng: 'en',
               debug: false
             };
 
             i18n.init(options || defaultOptions);
+
+            if (i18n.options.attributes instanceof String) {
+              i18n.options.attributes = [i18n.options.attributes];
+            }
           }
         }, {
           key: 'setLocale',
@@ -74,6 +79,91 @@ System.register(['i18next', './utils'], function (_export) {
           key: 'tr',
           value: function tr(key, options) {
             return this.i18next.t(key, assignObjectToKeys('', options));
+          }
+        }, {
+          key: 'updateTranslations',
+          value: function updateTranslations(el) {
+
+            var i, l;
+
+            var selector = [].concat(this.i18next.options.attributes);
+            for (i = 0, l = selector.length; i < l; i++) selector[i] = '[' + selector[i] + ']';
+            selector = selector.join(',');
+
+            var nodes = el.querySelectorAll(selector);
+            for (i = 0, l = nodes.length; i < l; i++) {
+              var node = nodes[i];
+              var keys;
+
+              for (var i2 = 0, l2 = this.i18next.options.attributes.length; i2 < l2; i2++) {
+                keys = node.getAttribute(this.i18next.options.attributes[i2]);
+                if (keys) break;
+              }
+
+              if (!keys) continue;
+
+              keys = keys.split(';');
+              var _iteratorNormalCompletion = true;
+              var _didIteratorError = false;
+              var _iteratorError = undefined;
+
+              try {
+                for (var _iterator = keys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                  var key = _step.value;
+
+                  var re = /\[([a-z]*)\]/g;
+
+                  var m;
+                  var attr = 'text';
+
+                  if (node.nodeName == 'IMG') attr = 'src';
+
+                  while ((m = re.exec(key)) !== null) {
+                    if (m.index === re.lastIndex) {
+                      re.lastIndex++;
+                    }
+                    if (m) {
+                      key = key.replace(m[0], '');
+                      attr = m[1];
+                    }
+                  }
+
+                  if (!node._textContent) node._textContent = node.textContent;
+                  if (!node._innerHTML) node._innerHTML = node.innerHTML;
+
+                  switch (attr) {
+                    case 'text':
+                      node.textContent = this.tr(key);
+                      break;
+                    case 'prepend':
+                      node.innerHTML = this.tr(key) + node._innerHTML.trim();
+                      break;
+                    case 'append':
+                      node.innerHTML = node._innerHTML.trim() + this.tr(key);
+                      break;
+                    case 'html':
+                      node.innerHTML = this.tr(key);
+                      break;
+                    default:
+                      node.setAttribute(attr, this.tr(key));
+                      break;
+                  }
+                }
+              } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+              } finally {
+                try {
+                  if (!_iteratorNormalCompletion && _iterator['return']) {
+                    _iterator['return']();
+                  }
+                } finally {
+                  if (_didIteratorError) {
+                    throw _iteratorError;
+                  }
+                }
+              }
+            }
           }
         }]);
 
