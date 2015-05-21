@@ -13,6 +13,7 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
   - [Setting the active locale](#setting-the-active-locale)
   - [Getting the active locale](#getting-the-active-locale)
   - [Translating via code](#translating-via-code)
+  - [Translating via html attributes](#translating-via-html-attributes)
   - [Translating with the TValueConverter](#translating-with-the-tvalueconverter)  
   - [Complex objects for variables](#complex-objects-for-variables)
   - [Formatting numbers via code](#formatting-numbers-via-code)
@@ -20,6 +21,7 @@ This plugin is part of the [Aurelia](http://www.aurelia.io/) platform. It sets u
   - [Formatting dates via code](#formatting-dates-via-code)
   - [Formatting dates with DfValueConverter](#formatting-dates-with-dfvalueconverter)
   - [Rendering relative time](#rendering-relative-time)
+- [CLI Integration](#cli-integration)
 - [Running the unit tests](#running-the-unit-tests)
   
 
@@ -57,7 +59,7 @@ jspm install aurelia-i18next=github:zewa666/aurelia-i18next
 
 6.. Create (if you haven't already) a file `main.js` in your `src` folder with following content:
 
-  ```javascript
+```javascript
   import {I18N} from 'aurelia-i18next';
 
   export function configure(aurelia) {
@@ -69,6 +71,7 @@ jspm install aurelia-i18next=github:zewa666/aurelia-i18next
         instance.setup({
           resGetPath : 'locale/__lng__/__ns__.json',
           lng : 'de',
+          attributes : ['t','i18n'],
           getAsync : true,
           sendMissing : false,
           fallbackLng : 'en',
@@ -78,7 +81,7 @@ jspm install aurelia-i18next=github:zewa666/aurelia-i18next
 
     aurelia.start().then(a => a.setRoot());
   }
-  ```
+```
 
 ## How to use this plugin
 i18next translations work by setting up an active locale, which you've setup above in the init phase with the property `lng`.
@@ -134,6 +137,138 @@ export class MyDemoVM {
 	...
 }
 ```
+
+### Translating via html attributes
+Tranlation in html can be done using attributes, by default the plugin is configured to use the `t` and `i18n` attributes. this can be configured during plugin registration using the attribute property.
+
+```javascript
+...
+instance.setup({
+	...
+	attributes : ['t','i18n'],
+	...
+});
+...
+```
+
+Any element in the html that has one of those attributes will be translated when the locale is changed.
+
+```markup
+<span t="title">Title</span>
+```
+
+The element will use the `title` as the key when translating that element.
+The other attributes specified in the `attributes` option can also be used.
+
+```markup
+<span i18n="home.title">Title</span>
+```
+
+Notice in the above example the key was set to `home.title` this will make the plugin look for a translation with tested objects in your translation json, ie:
+
+```javascript
+{
+  "home": {
+    "title": "Title",
+  }
+}
+```
+
+Use `updateTranslation()` to update all translations within the children of the element that is passed to it.
+The following example shows how a view model can be configured to update it's contents when the view is attached and every time a locale is changed.
+
+```javascript
+import {I18N} from 'aurelia-i18next';
+import {EventAggregator} from 'aurelia-event-aggregator';
+
+export class MyDemoVM {
+  static inject = [I18N,Element,EventAggregator];
+  constructor(i18n,element,ea) {
+    this.i18n = i18n;
+    this.element = element;
+	   
+	ea.subscribe('i18n:locale:changed', payload => {
+	  this.i18n.updateTranslations(this.element);
+	});
+  }
+  attached(){
+    this.i18n.updateTranslations(this.element)
+  }
+}
+```
+
+#### Specifying attributes
+By default the plugin will set the `textContent` property of an element. this means that html tags cannot be used in the translated values.
+
+```markup
+//translation
+{
+  "title": "Title <b>bold</b>"
+}
+
+//markup
+<span t="title">Title</span>
+```
+
+If that is translated the html tags will be escaped and the output will be `&lt;b&gt;bold&lt;/b&gt;`.
+To allow html to be used the `[html]` attribute needs to be added before the translation key.
+
+```markup
+<span t="[html]title">Title</span>
+```
+That will set the `innerHTML` property of the element rather than `textContent` so html will not be escaped.
+
+So what other attributes are available ?
+
+There are 4 special attributes includeing the `[html]`:
+
+* `[text]`:  Sets the `textContent` property (default)
+* `[html]`:  Sets the `innerHTML` property
+* `[append]`:  append the translation to the current content already in the element (allows html).
+* `[prepend]`: prepend the translation to the current content already in the element (allows html).
+
+Any other values will be used as actual attributes on the element.
+The following example will not change the content of the element but it will set the `alt` attribute to the translated value of `title` when locale changes.
+
+```markup
+<span t="[alt]title">Title</span>
+```
+
+#### Specifying multiple attributes
+
+Multiple attributes can be specified by separating them with a semicolon.
+
+```markup
+<span t="[html]title;[class]title-class">Title</span>
+```
+
+When locale changes it will set the `innerHTML` to the translated value of `title` because of the `[html]` attribute, and the `class` attribute will be set to the translated value of `title-class`.
+
+#### Using nested translations
+
+Nested translations work as expected with the html attributes.
+This example will use 2 separate translations keys to create the output.
+
+```markup
+<span t="${title} ${subtitle}">Title subtitle</span>
+```
+
+#### Translating images
+
+Images can also be translated for when a different image needs to be displayed in another language.
+
+```markup
+<img t="home.image" />
+```
+
+The plugin will automatically change the `src` attribute of the image when locale changes.
+
+A default value can also be specified for images.
+
+```markup
+<img data-src="path/to/image.jpg" t="home.image" />
+```
+This will be picked up by the CLI when translations are extracted from the source files. (see the section on [CLI Integration](#cli-integration))
 
 ### Translating with the TValueConverter
 In order to do translations in a more declarative way from within your HTML markup you can use a custom ValueConverter named `t`. It takes exactly the same `options` as the code translation method `tr` but of course provides the key automatically.
@@ -382,6 +517,11 @@ A more declarative approach is to use the RtValueConverter directly in your HTML
   </ul>
 </div>
 ```
+
+## CLI Integration
+
+There will be a command line tool that can create `translation.json` files for you by extracting the values from the html and javascript files.
+(coming soon)
 
 ## Running the unit tests
 
