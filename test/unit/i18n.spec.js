@@ -81,17 +81,4 @@ describe('testing i18n translations', () => {
   it('should support nested translations', () => {
     expect(sut.tr('nested_referencing', { count: 1, round: 1 })).toEqual('1 life remaining in round 1');
   });
-
-  it('should sort according to given locale', () => {
-    var names = ["Hochberg", "Hönigswald", "Holzman"]
-      , germanPhonebook = new Intl.Collator("de-DE-u-co-phonebk"),
-        germanPhonetic = new  Intl.Collator("de-DE-u-co-dict");
-
-    expect(names.sort(germanPhonebook.compare).join(", ")).toBe('Hochberg, Hönigswald, Holzman');
-
-    var norwegianPhonebook = new Intl.Collator('nb-NO');
-    names = ['Åse', 'Anton', 'Øystein', 'Viktor', 'Ærlend', 'Jarle' ];
-
-    expect(names.sort(norwegianPhonebook.compare).join(", ")).toBe('Anton, Jarle, Viktor, Ærlend, Øystein, Åse');
-  });
 });
