@@ -90,7 +90,7 @@ In order to change the active language you'd have to call the function `setLocal
 import {I18N} from 'aurelia-i18next';
 
 export class MyDemoVM {
-	static inject() { return [I18N]; }
+	static inject = [I18N];
 	constructor(i18n) {
 	  this.i18n = i18n;
 		this.i18n
@@ -110,7 +110,7 @@ To get the active locale you'd go with `getLocale()`:
 import {I18N} from 'aurelia-i18next';
 
 export class MyDemoVM {
-	static inject() { return [I18N]; }
+	static inject = [I18N];
 	constructor(i18n) {
 	   this.i18n = i18n;
 		 console.log(this.i18n.getLocale());
@@ -126,7 +126,7 @@ Translating stuff via code works by using the method `tr`. You pass in the `key`
 import {I18N} from 'aurelia-i18next';
 
 export class MyDemoVM {
-	static inject() { return [I18N]; }
+	static inject = [I18N];
 	constructor(i18n) {
 	   this.i18n = i18n;
 		 console.log(this.i18n.tr('mykey'));
@@ -229,7 +229,7 @@ Below is an example how to access the NumberFormat via code:
 import {I18N} from 'aurelia-i18next';
 
 export class MyDemoVM {
-  static inject() { return [I18N]; }
+  static inject = [I18N];
 	constructor(i18n) {
 	  this.i18n = i18n;
 	    
@@ -289,7 +289,7 @@ Below you'll find an example how to use those via code:
 import {I18N} from 'aurelia-i18next';
 
 export class MyDemoVM {
-  static inject() { return [I18N]; }
+  static inject = [I18N];
 	constructor(i18n) {
 	  this.i18n = i18n;
 	    
@@ -352,7 +352,7 @@ To use it via code get hold of the service via injection and call the method as 
 import {RelativeTime} from 'aurelia-i18next';
 
 export class MyDemoVM {
-  static inject() { return [RelativeTime]; }
+  static inject = [I18N];
 	constructor(relativeTime) {
 	  this.rt = relativeTime;
 	    
