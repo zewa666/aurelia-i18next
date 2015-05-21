@@ -139,7 +139,8 @@ export class MyDemoVM {
 ```
 
 ### Translating via html attributes
-Tranlation in html can be done using attributes, by default the plugin is configured to use the `t` and `i18n` attributes. this can be configured during plugin registration using the attribute property.
+Translation in html can be done alternatively using attributes. By default the plugin is configured to use the `t` and `i18n` attributes.
+This can be configured during the plugin registration using the `attributes` property.
 
 ```javascript
 ...
@@ -151,20 +152,20 @@ instance.setup({
 ...
 ```
 
-Any element in the html that has one of those attributes will be translated when the locale is changed.
+Any element in your views that has one of those attributes, will be translated when the locale is changed.
 
 ```markup
 <span t="title">Title</span>
 ```
 
-The element will use the `title` as the key when translating that element.
-The other attributes specified in the `attributes` option can also be used.
+The plugin will use the `title` as the key when translating that element.
+Other attributes, specified in the `attributes` option, may be used as well.
 
 ```markup
 <span i18n="home.title">Title</span>
 ```
 
-Notice in the above example the key was set to `home.title` this will make the plugin look for a translation with tested objects in your translation json, ie:
+Notice in the above example that the key was set to `home.title`. This will make the plugin look for a translation with nested objects in your translation json, ie:
 
 ```javascript
 {
@@ -187,18 +188,19 @@ export class MyDemoVM {
     this.i18n = i18n;
     this.element = element;
 	   
-	ea.subscribe('i18n:locale:changed', payload => {
-	  this.i18n.updateTranslations(this.element);
-	});
+	  ea.subscribe('i18n:locale:changed', payload => {
+	    this.i18n.updateTranslations(this.element);
+	  });
   }
+  
   attached(){
-    this.i18n.updateTranslations(this.element)
+    this.i18n.updateTranslations(this.element);
   }
 }
 ```
 
 #### Specifying attributes
-By default the plugin will set the `textContent` property of an element. this means that html tags cannot be used in the translated values.
+By default the plugin will set the `textContent` property of an element.
 
 ```markup
 //translation
@@ -210,25 +212,22 @@ By default the plugin will set the `textContent` property of an element. this me
 <span t="title">Title</span>
 ```
 
-If that is translated the html tags will be escaped and the output will be `&lt;b&gt;bold&lt;/b&gt;`.
-To allow html to be used the `[html]` attribute needs to be added before the translation key.
+So in above example the html tags will be escaped and the output will be `&lt;b&gt;bold&lt;/b&gt;`.
+To allow html-markup to be used, the `[html]` attribute needs to be added before the translation key.
 
 ```markup
 <span t="[html]title">Title</span>
 ```
-That will set the `innerHTML` property of the element rather than `textContent` so html will not be escaped.
-
-So what other attributes are available ?
-
-There are 4 special attributes includeing the `[html]`:
+This will set the `innerHTML` of the element instead of the `textContent` property, so html-markup won't be escaped.
+There are 4 special attributes including the shown `[html]`:
 
 * `[text]`:  Sets the `textContent` property (default)
 * `[html]`:  Sets the `innerHTML` property
-* `[append]`:  append the translation to the current content already in the element (allows html).
-* `[prepend]`: prepend the translation to the current content already in the element (allows html).
+* `[append]`:  appends the translation to the current content already present in the element (allows html).
+* `[prepend]`: prepends the translation to the current content already present in the element (allows html).
 
 Any other values will be used as actual attributes on the element.
-The following example will not change the content of the element but it will set the `alt` attribute to the translated value of `title` when locale changes.
+The following example will not change the content of the element, but will set its `alt` attribute to the translated value of `title` when the locale changes.
 
 ```markup
 <span t="[alt]title">Title</span>
@@ -242,28 +241,43 @@ Multiple attributes can be specified by separating them with a semicolon.
 <span t="[html]title;[class]title-class">Title</span>
 ```
 
-When locale changes it will set the `innerHTML` to the translated value of `title` because of the `[html]` attribute, and the `class` attribute will be set to the translated value of `title-class`.
+When the locale changes it will set the `innerHTML` to the translated value of `title` due to the `[html]` attribute and the `class` property to the translated value of `title-class`.
 
-#### Using nested translations
+#### Using nested and combined translations
 
-Nested translations work as expected with the html attributes.
-This example will use 2 separate translations keys to create the output.
+In order to combine two or more translations, just include them with the `$t(yourkey)` markup 
 
 ```markup
-<span t="${title} ${subtitle}">Title subtitle</span>
+<span t="$t(title) $t(subtitle)">Title subtitle</span>
+```
+
+Nested keys may also be referenced and will be properly translated:
+ 
+```javascript
+{
+  "translation": {
+    "title": "Title",
+    "nested_referencing": 'The $t(title) is the header',
+    ...
+  }
+}
+``` 
+
+```markup
+<span t="nested_referencing">Nested text</span>
 ```
 
 #### Translating images
 
-Images can also be translated for when a different image needs to be displayed in another language.
+Images can be translated as well, for when a different image needs to be displayed in another language.
 
 ```markup
 <img t="home.image" />
 ```
 
-The plugin will automatically change the `src` attribute of the image when locale changes.
+The plugin will automatically change the `src` attribute of the image when the locale changes.
 
-A default value can also be specified for images.
+You may specify a default value for images as well. In order to do so just define an attribute called `data-src` with the default value.
 
 ```markup
 <img data-src="path/to/image.jpg" t="home.image" />
