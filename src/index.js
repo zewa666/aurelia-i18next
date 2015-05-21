@@ -2,6 +2,10 @@ import {I18N} from './i18n';
 export {I18N} from './i18n';
 export {RelativeTime} from './relativeTime';
 import {EventAggregator} from 'aurelia-event-aggregator';
+export {DfValueConverter} from './df';
+export {NfValueConverter} from './nf';
+export {RtValueConverter} from './rt';
+export {TValueConverter} from './t';
 
 export function configure(aurelia, cb){
   if(cb === undefined || typeof cb !== 'function') {
