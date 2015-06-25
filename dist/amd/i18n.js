@@ -1,23 +1,23 @@
 define(['exports', 'i18next', './utils'], function (exports, _i18next, _utils) {
   'use strict';
 
-  var _interopRequire = function (obj) { return obj && obj.__esModule ? obj['default'] : obj; };
-
-  var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
   Object.defineProperty(exports, '__esModule', {
     value: true
   });
 
-  var _i18n = _interopRequire(_i18next);
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+  var _i18n = _interopRequireDefault(_i18next);
 
   var I18N = (function () {
     function I18N(ea) {
       _classCallCheck(this, I18N);
 
-      this.i18next = _i18n;
+      this.i18next = _i18n['default'];
       this.ea = ea;
       this.Intl = window.Intl;
 
@@ -41,10 +41,10 @@ define(['exports', 'i18next', './utils'], function (exports, _i18next, _utils) {
           debug: false
         };
 
-        _i18n.init(options || defaultOptions);
+        _i18n['default'].init(options || defaultOptions);
 
-        if (_i18n.options.attributes instanceof String) {
-          _i18n.options.attributes = [_i18n.options.attributes];
+        if (_i18n['default'].options.attributes instanceof String) {
+          _i18n['default'].options.attributes = [_i18n['default'].options.attributes];
         }
       }
     }, {
@@ -77,7 +77,7 @@ define(['exports', 'i18next', './utils'], function (exports, _i18next, _utils) {
     }, {
       key: 'tr',
       value: function tr(key, options) {
-        return this.i18next.t(key, _utils.assignObjectToKeys('', options));
+        return this.i18next.t(key, (0, _utils.assignObjectToKeys)('', options));
       }
     }, {
       key: 'updateTranslations',

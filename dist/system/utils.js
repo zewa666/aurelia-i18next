@@ -1,10 +1,10 @@
 System.register([], function (_export) {
+  'use strict';
+
   var extend, assignObjectToKeys;
   return {
     setters: [],
     execute: function () {
-      'use strict';
-
       extend = function extend(destination, source) {
         for (var property in source) destination[property] = source[property];
         return destination;
@@ -12,18 +12,8 @@ System.register([], function (_export) {
 
       _export('extend', extend);
 
-      assignObjectToKeys = (function (_assignObjectToKeys) {
-        function assignObjectToKeys(_x, _x2) {
-          return _assignObjectToKeys.apply(this, arguments);
-        }
-
-        assignObjectToKeys.toString = function () {
-          return _assignObjectToKeys.toString();
-        };
-
-        return assignObjectToKeys;
-      })(function (root, obj) {
-        if (obj === undefined) return undefined;
+      assignObjectToKeys = function assignObjectToKeys(root, obj) {
+        if (obj === undefined || obj === null) return obj;
 
         var opts = {};
 
@@ -36,7 +26,7 @@ System.register([], function (_export) {
         });
 
         return opts;
-      });
+      };
 
       _export('assignObjectToKeys', assignObjectToKeys);
     }

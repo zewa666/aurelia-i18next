@@ -5,8 +5,8 @@ export var extend = (destination,source) => {
 };
 
 export var assignObjectToKeys = (root, obj) => {
-  if(obj === undefined)
-    return undefined;
+  if(obj === undefined || obj === null)
+    return obj;
 
   var opts = {};
 

@@ -5,59 +5,59 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports.configure = configure;
 
-var _I18N = require('./i18n');
+var _i18n = require('./i18n');
 
-var _EventAggregator = require('aurelia-event-aggregator');
+var _aureliaEventAggregator = require('aurelia-event-aggregator');
 
 Object.defineProperty(exports, 'I18N', {
   enumerable: true,
   get: function get() {
-    return _I18N.I18N;
+    return _i18n.I18N;
   }
 });
 
-var _RelativeTime = require('./relativeTime');
+var _relativeTime = require('./relativeTime');
 
 Object.defineProperty(exports, 'RelativeTime', {
   enumerable: true,
   get: function get() {
-    return _RelativeTime.RelativeTime;
+    return _relativeTime.RelativeTime;
   }
 });
 
-var _DfValueConverter = require('./df');
+var _df = require('./df');
 
 Object.defineProperty(exports, 'DfValueConverter', {
   enumerable: true,
   get: function get() {
-    return _DfValueConverter.DfValueConverter;
+    return _df.DfValueConverter;
   }
 });
 
-var _NfValueConverter = require('./nf');
+var _nf = require('./nf');
 
 Object.defineProperty(exports, 'NfValueConverter', {
   enumerable: true,
   get: function get() {
-    return _NfValueConverter.NfValueConverter;
+    return _nf.NfValueConverter;
   }
 });
 
-var _RtValueConverter = require('./rt');
+var _rt = require('./rt');
 
 Object.defineProperty(exports, 'RtValueConverter', {
   enumerable: true,
   get: function get() {
-    return _RtValueConverter.RtValueConverter;
+    return _rt.RtValueConverter;
   }
 });
 
-var _TValueConverter = require('./t');
+var _t = require('./t');
 
 Object.defineProperty(exports, 'TValueConverter', {
   enumerable: true,
   get: function get() {
-    return _TValueConverter.TValueConverter;
+    return _t.TValueConverter;
   }
 });
 
@@ -70,8 +70,8 @@ function configure(aurelia, cb) {
   aurelia.globalizeResources('./nf');
   aurelia.globalizeResources('./df');
   aurelia.globalizeResources('./rt');
-  var instance = new _I18N.I18N(aurelia.container.get(_EventAggregator.EventAggregator));
-  aurelia.container.registerInstance(_I18N.I18N, instance);
+  var instance = new _i18n.I18N(aurelia.container.get(_aureliaEventAggregator.EventAggregator));
+  aurelia.container.registerInstance(_i18n.I18N, instance);
 
   return cb(instance);
 }

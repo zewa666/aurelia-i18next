@@ -1,5 +1,11 @@
 System.register(['./i18n', './defaultTranslations/relative.time'], function (_export) {
-  var I18N, translations, _classCallCheck, _createClass, RelativeTime;
+  'use strict';
+
+  var I18N, translations, RelativeTime;
+
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
   return {
     setters: [function (_i18n) {
@@ -8,12 +14,6 @@ System.register(['./i18n', './defaultTranslations/relative.time'], function (_ex
       translations = _defaultTranslationsRelativeTime;
     }],
     execute: function () {
-      'use strict';
-
-      _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
-      _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
       RelativeTime = (function () {
         function RelativeTime(i18n) {
           var _this = this;
@@ -23,7 +23,7 @@ System.register(['./i18n', './defaultTranslations/relative.time'], function (_ex
           this.service = i18n;
 
           Object.keys(translations['default']).map(function (key) {
-            var translation = translations['default'][key].translation;
+            var translation = translations['default'][key]['translation'];
             var options = i18n.i18next.options;
 
             if (options.interpolationPrefix !== '__' || options.interpolationSuffix !== '__') {
