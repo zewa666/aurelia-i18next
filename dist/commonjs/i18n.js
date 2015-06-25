@@ -1,26 +1,26 @@
 'use strict';
 
+var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _i18n = require('i18next');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+var _i18n2 = _interopRequireWildcard(_i18n);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var _i18next = require('i18next');
-
-var _i18next2 = _interopRequireDefault(_i18next);
-
-var _utils = require('./utils');
+var _assignObjectToKeys = require('./utils');
 
 var I18N = (function () {
   function I18N(ea) {
     _classCallCheck(this, I18N);
 
-    this.i18next = _i18next2['default'];
+    this.i18next = _i18n2['default'];
     this.ea = ea;
     this.Intl = window.Intl;
 
@@ -44,10 +44,10 @@ var I18N = (function () {
         debug: false
       };
 
-      _i18next2['default'].init(options || defaultOptions);
+      _i18n2['default'].init(options || defaultOptions);
 
-      if (_i18next2['default'].options.attributes instanceof String) {
-        _i18next2['default'].options.attributes = [_i18next2['default'].options.attributes];
+      if (_i18n2['default'].options.attributes instanceof String) {
+        _i18n2['default'].options.attributes = [_i18n2['default'].options.attributes];
       }
     }
   }, {
@@ -80,7 +80,7 @@ var I18N = (function () {
   }, {
     key: 'tr',
     value: function tr(key, options) {
-      return this.i18next.t(key, (0, _utils.assignObjectToKeys)('', options));
+      return this.i18next.t(key, _assignObjectToKeys.assignObjectToKeys('', options));
     }
   }, {
     key: 'updateTranslations',

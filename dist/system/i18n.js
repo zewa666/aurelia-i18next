@@ -1,11 +1,5 @@
 System.register(['i18next', './utils'], function (_export) {
-  'use strict';
-
-  var i18n, assignObjectToKeys, I18N;
-
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  var i18n, assignObjectToKeys, _classCallCheck, _createClass, I18N;
 
   return {
     setters: [function (_i18next) {
@@ -14,6 +8,12 @@ System.register(['i18next', './utils'], function (_export) {
       assignObjectToKeys = _utils.assignObjectToKeys;
     }],
     execute: function () {
+      'use strict';
+
+      _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+      _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
       I18N = (function () {
         function I18N(ea) {
           _classCallCheck(this, I18N);

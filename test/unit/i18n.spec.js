@@ -81,4 +81,12 @@ describe('testing i18n translations', () => {
   it('should support nested translations', () => {
     expect(sut.tr('nested_referencing', { count: 1, round: 1 })).toEqual('1 life remaining in round 1');
   });
+
+  it('should handle null options', () => {
+    expect(sut.tr('nested_referencing', { count: 1, round: null })).toEqual('1 life remaining in round __round__');
+  })
+
+  it('should handle undefined options', () => {
+    expect(sut.tr('nested_referencing', { count: 1 })).toEqual('1 life remaining in round undefined');
+  })
 });

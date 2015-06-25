@@ -9,7 +9,17 @@ var extend = function extend(destination, source) {
 };
 
 exports.extend = extend;
-var assignObjectToKeys = function assignObjectToKeys(root, obj) {
+var assignObjectToKeys = (function (_assignObjectToKeys) {
+  function assignObjectToKeys(_x, _x2) {
+    return _assignObjectToKeys.apply(this, arguments);
+  }
+
+  assignObjectToKeys.toString = function () {
+    return _assignObjectToKeys.toString();
+  };
+
+  return assignObjectToKeys;
+})(function (root, obj) {
   if (obj === undefined || obj === null) return obj;
 
   var opts = {};
@@ -23,5 +33,5 @@ var assignObjectToKeys = function assignObjectToKeys(root, obj) {
   });
 
   return opts;
-};
+});
 exports.assignObjectToKeys = assignObjectToKeys;
