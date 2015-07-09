@@ -56,8 +56,9 @@ var I18N = (function () {
       var _this = this;
 
       return new Promise(function (resolve) {
+        var oldLocale = _this.getLocale();
         _this.i18next.setLng(locale, function (tr) {
-          _this.ea.publish('i18n:locale:changed');
+          _this.ea.publish('i18n:locale:changed', { oldValue: oldLocale, newValue: locale });
           resolve(tr);
         });
       });
