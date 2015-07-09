@@ -89,4 +89,16 @@ describe('testing i18n translations', () => {
   it('should handle undefined options', () => {
     expect(sut.tr('nested_referencing', { count: 1, round: undefined })).toEqual('1 life remaining in round undefined');
   });
+
+  it('should trigger an event when switching locales', (done) => {
+    var subscription = sut.ea.subscribe('i18n:locale:changed', (payload) => {
+      subscription();
+
+      expect(payload.oldValue).toBe('en');
+      expect(payload.newValue).toBe('de');
+      done();
+    });
+
+    sut.setLocale('de');
+  });
 });

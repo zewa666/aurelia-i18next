@@ -39,7 +39,7 @@ export class I18N {
     return new Promise( resolve => {
       var oldLocale = this.getLocale();
       this.i18next.setLng(locale, tr=>{
-        this.ea.publish("i18n:locale:changed",{oldValue:oldLocale,newValue:locale});
+        this.ea.publish("i18n:locale:changed", { oldValue:oldLocale, newValue:locale });
         resolve(tr);
       });
     });
