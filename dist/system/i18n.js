@@ -18,6 +18,8 @@ System.register(['i18next', './utils'], function (_export) {
         function I18N(ea) {
           _classCallCheck(this, I18N);
 
+          this.globalVars = {};
+
           this.i18next = i18n;
           this.ea = ea;
           this.Intl = window.Intl;
@@ -30,6 +32,10 @@ System.register(['i18next', './utils'], function (_export) {
         }
 
         _createClass(I18N, [{
+          key: 'globalVars',
+          value: undefined,
+          enumerable: true
+        }, {
           key: 'setup',
           value: function setup(options) {
             var defaultOptions = {
@@ -79,7 +85,23 @@ System.register(['i18next', './utils'], function (_export) {
         }, {
           key: 'tr',
           value: function tr(key, options) {
-            return this.i18next.t(key, assignObjectToKeys('', options));
+            var fullOptions = this.globalVars;
+
+            if (options !== undefined) {
+              fullOptions = Object.assign(Object.assign({}, this.globalVars), options);
+            }
+
+            return this.i18next.t(key, assignObjectToKeys('', fullOptions));
+          }
+        }, {
+          key: 'registerGlobalVariable',
+          value: function registerGlobalVariable(key, value) {
+            this.globalVars[key] = value;
+          }
+        }, {
+          key: 'unregisterGlobalVariable',
+          value: function unregisterGlobalVariable(key) {
+            delete this.globalVars[key];
           }
         }, {
           key: 'updateTranslations',

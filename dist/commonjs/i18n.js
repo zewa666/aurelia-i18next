@@ -20,6 +20,8 @@ var I18N = (function () {
   function I18N(ea) {
     _classCallCheck(this, I18N);
 
+    this.globalVars = {};
+
     this.i18next = _i18n2['default'];
     this.ea = ea;
     this.Intl = window.Intl;
@@ -32,6 +34,10 @@ var I18N = (function () {
   }
 
   _createClass(I18N, [{
+    key: 'globalVars',
+    value: undefined,
+    enumerable: true
+  }, {
     key: 'setup',
     value: function setup(options) {
       var defaultOptions = {
@@ -81,7 +87,23 @@ var I18N = (function () {
   }, {
     key: 'tr',
     value: function tr(key, options) {
-      return this.i18next.t(key, _assignObjectToKeys.assignObjectToKeys('', options));
+      var fullOptions = this.globalVars;
+
+      if (options !== undefined) {
+        fullOptions = Object.assign(Object.assign({}, this.globalVars), options);
+      }
+
+      return this.i18next.t(key, _assignObjectToKeys.assignObjectToKeys('', fullOptions));
+    }
+  }, {
+    key: 'registerGlobalVariable',
+    value: function registerGlobalVariable(key, value) {
+      this.globalVars[key] = value;
+    }
+  }, {
+    key: 'unregisterGlobalVariable',
+    value: function unregisterGlobalVariable(key) {
+      delete this.globalVars[key];
     }
   }, {
     key: 'updateTranslations',

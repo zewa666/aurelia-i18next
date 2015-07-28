@@ -18,7 +18,8 @@ describe('testing i18n translations', () => {
           "friend_male": "A boyfriend",
           "friend_female": "A girlfriend",
           "complex": '__field__ should be between __threshold.min__ and __threshold.max__',
-          "nested_referencing": '$t(lives) in round __round__'
+          "nested_referencing": '$t(lives) in round __round__',
+          "statement": '__brand__ is a next next gen JavaScript client framework'
         }
       },
       de: {
@@ -30,7 +31,8 @@ describe('testing i18n translations', () => {
           "lives_plural_indefinite": "einige Lebenspunkte übrig",
           "friend": "Ein Freund",
           "friend_male": "Ein Freund",
-          "friend_female": "Eine Freundin"
+          "friend_female": "Eine Freundin",
+          "statement": '__brand__ ist ein JavaScript client framework der nächsten Generation'
         }
       }
     };
@@ -80,6 +82,26 @@ describe('testing i18n translations', () => {
 
   it('should support nested translations', () => {
     expect(sut.tr('nested_referencing', { count: 1, round: 1 })).toEqual('1 life remaining in round 1');
+  });
+
+  it('should automatically add global variables as options if none provided', () => {
+    sut.registerGlobalVariable('brand', 'Aurelia');
+
+    expect(sut.tr('statement')).toEqual('Aurelia is a next next gen JavaScript client framework');
+  });
+
+  it('should prefer passed in options vs. global variables', () => {
+    sut.registerGlobalVariable('brand', 'Aurelia');
+
+    expect(sut.tr('statement', { brand: 'Aurelia.io' })).toEqual('Aurelia.io is a next next gen JavaScript client framework');
+  });
+
+  it('should allow unregistering of global variables', () => {
+    sut.registerGlobalVariable('brand', 'Aurelia');
+    expect(sut.tr('statement')).toEqual('Aurelia is a next next gen JavaScript client framework');
+
+    sut.unregisterGlobalVariable('brand');
+    expect(sut.tr('statement')).toEqual('__brand__ is a next next gen JavaScript client framework');
   });
 
   it('should handle null options', () => {

@@ -3,6 +3,8 @@ import {assignObjectToKeys} from './utils';
 
 export class I18N {
 
+  globalVars = {};
+
   constructor(ea) {
     this.i18next = i18n;
     this.ea = ea;
@@ -58,7 +60,21 @@ export class I18N {
   }
 
   tr(key, options) {
-    return this.i18next.t(key, assignObjectToKeys('', options));
+    let fullOptions = this.globalVars;
+
+    if(options !== undefined) {
+      fullOptions = Object.assign(Object.assign({}, this.globalVars), options);
+    }
+
+    return this.i18next.t(key, assignObjectToKeys('', fullOptions));
+  }
+
+  registerGlobalVariable(key, value) {
+    this.globalVars[key] = value;
+  }
+
+  unregisterGlobalVariable(key) {
+    delete this.globalVars[key];
   }
 
   /**
