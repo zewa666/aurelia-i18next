@@ -34,7 +34,7 @@
     "karma-babel-preprocessor": "^5.0.1",
     "karma-chrome-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.5",
-    "karma-jspm": "^1.1.4",
+    "karma-jspm": "^2.0.1-beta.2",
     "object.assign": "^1.0.3",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.2",
@@ -49,7 +49,8 @@
     },
     "dependencies": {
       "Intl.js": "github:andyearnshaw/Intl.js@^0.1.4",
-      "aurelia-event-aggregator": "github:aurelia/event-aggregator@^0.6.0",
+      "aurelia-event-aggregator": "github:aurelia/event-aggregator@^0.7.0",
+      "aurelia-loader-default": "github:aurelia/loader-default@^0.9.5",
       "i18next": "github:i18next/i18next@^1.9.0"
     },
     "devDependencies": {
