@@ -42,17 +42,17 @@ define(['exports', './i18n', 'aurelia-event-aggregator', './relativeTime', './df
     }
   });
 
-  function configure(aurelia, cb) {
+  function configure(config, cb) {
     if (cb === undefined || typeof cb !== 'function') {
       throw 'You need to provide a callback method to properly configure the library';
     }
 
-    aurelia.globalizeResources('./t');
-    aurelia.globalizeResources('./nf');
-    aurelia.globalizeResources('./df');
-    aurelia.globalizeResources('./rt');
-    var instance = new _i18n.I18N(aurelia.container.get(_aureliaEventAggregator.EventAggregator));
-    aurelia.container.registerInstance(_i18n.I18N, instance);
+    config.globalResources('./t');
+    config.globalResources('./nf');
+    config.globalResources('./df');
+    config.globalResources('./rt');
+    var instance = new _i18n.I18N(config.container.get(_aureliaEventAggregator.EventAggregator));
+    config.container.registerInstance(_i18n.I18N, instance);
 
     return cb(instance);
   }
