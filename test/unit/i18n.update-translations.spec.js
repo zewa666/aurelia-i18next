@@ -9,7 +9,7 @@ describe('testing i18n translation update', () => {
 
     System.config({
       "paths": {
-        "*": "test/unit/fixtures/*.js"
+        "fixture:*": "test/unit/fixtures/*.js"
       }
     });
 
@@ -49,7 +49,7 @@ describe('testing i18n translation update', () => {
     });
 
     //load the the html fixture
-    System.import('template.html!text').then((result) => {
+    System.import('fixture:template.html!text').then((result) => {
       template           = document.createElement("div");
       template.innerHTML = result;
       if (template.firstChild instanceof HTMLTemplateElement) template.innerHTML = template.firstChild.innerHTML;
@@ -77,7 +77,7 @@ describe('testing i18n translation update', () => {
     });
 
     //load the the html fixture
-    System.import('template.html!text').then((result) => {
+    System.import('fixture:template.html!text').then((result) => {
       template           = document.createElement("div");
       template.innerHTML = result;
       if (template.firstChild instanceof HTMLTemplateElement) template.innerHTML = template.firstChild.innerHTML;

@@ -3,17 +3,17 @@ System.register(['./i18n', 'aurelia-event-aggregator', './relativeTime', './df',
 
   _export('configure', configure);
 
-  function configure(aurelia, cb) {
+  function configure(config, cb) {
     if (cb === undefined || typeof cb !== 'function') {
       throw 'You need to provide a callback method to properly configure the library';
     }
 
-    aurelia.globalizeResources('./t');
-    aurelia.globalizeResources('./nf');
-    aurelia.globalizeResources('./df');
-    aurelia.globalizeResources('./rt');
-    var instance = new I18N(aurelia.container.get(EventAggregator));
-    aurelia.container.registerInstance(I18N, instance);
+    config.globalResources('./t');
+    config.globalResources('./nf');
+    config.globalResources('./df');
+    config.globalResources('./rt');
+    var instance = new I18N(config.container.get(EventAggregator));
+    config.container.registerInstance(I18N, instance);
 
     return cb(instance);
   }

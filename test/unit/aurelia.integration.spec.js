@@ -2,8 +2,8 @@ import {configure} from '../../src/index';
 
 describe('testing aurelia configure routine', () => {
 
-  var aurelia = {
-    globalizeResources: () => {
+  var frameworkConfig = {
+    globalResources: () => {
 
     },
     container: {
@@ -26,11 +26,11 @@ describe('testing aurelia configure routine', () => {
       done();
     };
 
-    configure(aurelia, cb);
+    configure(frameworkConfig, cb);
   });
 
   it('should throw custom error message if no callback is provided', () => {
-    expect(() => { configure(aurelia); })
+  expect(() => { configure(frameworkConfig); })
       .toThrow('You need to provide a callback method to properly configure the library');
   });
 });
