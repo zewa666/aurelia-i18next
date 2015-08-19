@@ -155,5 +155,4 @@ export class I18N {
       }
     }
   }
-
 }

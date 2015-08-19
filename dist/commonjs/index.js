@@ -9,6 +9,8 @@ var _I18N = require('./i18n');
 
 var _EventAggregator = require('aurelia-event-aggregator');
 
+var _ViewResources = require('aurelia-templating');
+
 Object.defineProperty(exports, 'I18N', {
   enumerable: true,
   get: function get() {
@@ -82,17 +84,28 @@ Object.defineProperty(exports, 'EventAggregator', {
   }
 });
 
-function configure(config, cb) {
+function configure(frameworkConfig, cb) {
   if (cb === undefined || typeof cb !== 'function') {
     throw 'You need to provide a callback method to properly configure the library';
   }
 
-  config.globalResources('./t');
-  config.globalResources('./nf');
-  config.globalResources('./df');
-  config.globalResources('./rt');
-  var instance = new _I18N.I18N(config.container.get(_EventAggregator.EventAggregator));
-  config.container.registerInstance(_I18N.I18N, instance);
+  frameworkConfig.globalResources('./t');
+  frameworkConfig.globalResources('./nf');
+  frameworkConfig.globalResources('./df');
+  frameworkConfig.globalResources('./rt');
+  var instance = new _I18N.I18N(frameworkConfig.container.get(_EventAggregator.EventAggregator));
+  frameworkConfig.container.registerInstance(_I18N.I18N, instance);
 
-  return cb(instance);
+  var ret = cb(instance);
+
+  frameworkConfig.postTask(function () {
+    var resources = frameworkConfig.container.get(_ViewResources.ViewResources);
+    var htmlBehaviorResource = resources.getAttribute('t');
+
+    instance.i18next.options.attributes.forEach(function (alias) {
+      return resources.registerAttribute(alias, htmlBehaviorResource, 't');
+    });
+  });
+
+  return ret;
 }

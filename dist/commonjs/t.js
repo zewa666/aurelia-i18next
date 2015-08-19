@@ -45,7 +45,9 @@ var TCustomAttribute = (function () {
   _createClass(TCustomAttribute, [{
     key: 'valueChanged',
     value: function valueChanged() {
-      this.service.updateTranslations(this.element.parentElement);
+      if (this.element.parentElement !== undefined) {
+        this.service.updateTranslations(this.element.parentElement);
+      }
     }
   }], [{
     key: 'inject',

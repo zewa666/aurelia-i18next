@@ -1,21 +1,32 @@
-System.register(['./i18n', 'aurelia-event-aggregator', './relativeTime', './df', './nf', './rt', './t', './base-i18n'], function (_export) {
-  var I18N, EventAggregator;
+System.register(['./i18n', 'aurelia-event-aggregator', 'aurelia-templating', './relativeTime', './df', './nf', './rt', './t', './base-i18n'], function (_export) {
+  var I18N, EventAggregator, ViewResources;
 
   _export('configure', configure);
 
-  function configure(config, cb) {
+  function configure(frameworkConfig, cb) {
     if (cb === undefined || typeof cb !== 'function') {
       throw 'You need to provide a callback method to properly configure the library';
     }
 
-    config.globalResources('./t');
-    config.globalResources('./nf');
-    config.globalResources('./df');
-    config.globalResources('./rt');
-    var instance = new I18N(config.container.get(EventAggregator));
-    config.container.registerInstance(I18N, instance);
+    frameworkConfig.globalResources('./t');
+    frameworkConfig.globalResources('./nf');
+    frameworkConfig.globalResources('./df');
+    frameworkConfig.globalResources('./rt');
+    var instance = new I18N(frameworkConfig.container.get(EventAggregator));
+    frameworkConfig.container.registerInstance(I18N, instance);
 
-    return cb(instance);
+    var ret = cb(instance);
+
+    frameworkConfig.postTask(function () {
+      var resources = frameworkConfig.container.get(ViewResources);
+      var htmlBehaviorResource = resources.getAttribute('t');
+
+      instance.i18next.options.attributes.forEach(function (alias) {
+        return resources.registerAttribute(alias, htmlBehaviorResource, 't');
+      });
+    });
+
+    return ret;
   }
 
   return {
@@ -27,6 +38,8 @@ System.register(['./i18n', 'aurelia-event-aggregator', './relativeTime', './df',
       EventAggregator = _aureliaEventAggregator.EventAggregator;
 
       _export('EventAggregator', _aureliaEventAggregator.EventAggregator);
+    }, function (_aureliaTemplating) {
+      ViewResources = _aureliaTemplating.ViewResources;
     }, function (_relativeTime) {
       _export('RelativeTime', _relativeTime.RelativeTime);
     }, function (_df) {

@@ -1,4 +1,4 @@
-define(['exports', './i18n', 'aurelia-event-aggregator', './relativeTime', './df', './nf', './rt', './t', './base-i18n'], function (exports, _i18n, _aureliaEventAggregator, _relativeTime, _df, _nf, _rt, _t, _baseI18n) {
+define(['exports', './i18n', 'aurelia-event-aggregator', 'aurelia-templating', './relativeTime', './df', './nf', './rt', './t', './base-i18n'], function (exports, _i18n, _aureliaEventAggregator, _aureliaTemplating, _relativeTime, _df, _nf, _rt, _t, _baseI18n) {
   'use strict';
 
   Object.defineProperty(exports, '__esModule', {
@@ -60,18 +60,29 @@ define(['exports', './i18n', 'aurelia-event-aggregator', './relativeTime', './df
     }
   });
 
-  function configure(config, cb) {
+  function configure(frameworkConfig, cb) {
     if (cb === undefined || typeof cb !== 'function') {
       throw 'You need to provide a callback method to properly configure the library';
     }
 
-    config.globalResources('./t');
-    config.globalResources('./nf');
-    config.globalResources('./df');
-    config.globalResources('./rt');
-    var instance = new _i18n.I18N(config.container.get(_aureliaEventAggregator.EventAggregator));
-    config.container.registerInstance(_i18n.I18N, instance);
+    frameworkConfig.globalResources('./t');
+    frameworkConfig.globalResources('./nf');
+    frameworkConfig.globalResources('./df');
+    frameworkConfig.globalResources('./rt');
+    var instance = new _i18n.I18N(frameworkConfig.container.get(_aureliaEventAggregator.EventAggregator));
+    frameworkConfig.container.registerInstance(_i18n.I18N, instance);
 
-    return cb(instance);
+    var ret = cb(instance);
+
+    frameworkConfig.postTask(function () {
+      var resources = frameworkConfig.container.get(_aureliaTemplating.ViewResources);
+      var htmlBehaviorResource = resources.getAttribute('t');
+
+      instance.i18next.options.attributes.forEach(function (alias) {
+        return resources.registerAttribute(alias, htmlBehaviorResource, 't');
+      });
+    });
+
+    return ret;
   }
 });

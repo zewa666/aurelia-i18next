@@ -11,17 +11,28 @@ export {TCustomAttribute} from './t';
 export {BaseI18N} from './base-i18n'
 export {EventAggregator} from 'aurelia-event-aggregator';
 
-export function configure(config, cb){
+import {ViewResources} from 'aurelia-templating';
+
+export function configure(frameworkConfig, cb){
   if(cb === undefined || typeof cb !== 'function') {
     throw 'You need to provide a callback method to properly configure the library';
   }
 
-  config.globalResources('./t');
-  config.globalResources('./nf');
-  config.globalResources('./df');
-  config.globalResources('./rt');
-  var instance = new I18N(config.container.get(EventAggregator));
-  config.container.registerInstance(I18N, instance);
+  frameworkConfig.globalResources('./t');
+  frameworkConfig.globalResources('./nf');
+  frameworkConfig.globalResources('./df');
+  frameworkConfig.globalResources('./rt');
+  var instance = new I18N(frameworkConfig.container.get(EventAggregator));
+  frameworkConfig.container.registerInstance(I18N, instance);
 
-  return cb(instance);
+  var ret = cb(instance);
+
+  frameworkConfig.postTask(() => {
+    let resources = frameworkConfig.container.get(ViewResources);
+    let htmlBehaviorResource = resources.getAttribute('t');
+
+    instance.i18next.options.attributes.forEach(alias => resources.registerAttribute(alias, htmlBehaviorResource, 't'));
+  });
+
+  return ret;
 }
