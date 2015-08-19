@@ -1,4 +1,4 @@
-define(['exports', './i18n', 'aurelia-event-aggregator', './relativeTime', './df', './nf', './rt', './t'], function (exports, _i18n, _aureliaEventAggregator, _relativeTime, _df, _nf, _rt, _t) {
+define(['exports', './i18n', 'aurelia-event-aggregator', './relativeTime', './df', './nf', './rt', './t', './base-i18n'], function (exports, _i18n, _aureliaEventAggregator, _relativeTime, _df, _nf, _rt, _t, _baseI18n) {
   'use strict';
 
   Object.defineProperty(exports, '__esModule', {
@@ -39,6 +39,24 @@ define(['exports', './i18n', 'aurelia-event-aggregator', './relativeTime', './df
     enumerable: true,
     get: function get() {
       return _t.TValueConverter;
+    }
+  });
+  Object.defineProperty(exports, 'TCustomAttribute', {
+    enumerable: true,
+    get: function get() {
+      return _t.TCustomAttribute;
+    }
+  });
+  Object.defineProperty(exports, 'BaseI18N', {
+    enumerable: true,
+    get: function get() {
+      return _baseI18n.BaseI18N;
+    }
+  });
+  Object.defineProperty(exports, 'EventAggregator', {
+    enumerable: true,
+    get: function get() {
+      return _aureliaEventAggregator.EventAggregator;
     }
   });
 

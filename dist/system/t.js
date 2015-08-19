@@ -1,5 +1,5 @@
 System.register(['./i18n'], function (_export) {
-  var I18N, _classCallCheck, _createClass, TValueConverter;
+  var I18N, _classCallCheck, _createClass, TValueConverter, TCustomAttribute;
 
   return {
     setters: [function (_i18n) {
@@ -35,6 +35,31 @@ System.register(['./i18n'], function (_export) {
       })();
 
       _export('TValueConverter', TValueConverter);
+
+      TCustomAttribute = (function () {
+        function TCustomAttribute(element, i18n) {
+          _classCallCheck(this, TCustomAttribute);
+
+          this.element = element;
+          this.service = i18n;
+        }
+
+        _createClass(TCustomAttribute, [{
+          key: 'valueChanged',
+          value: function valueChanged() {
+            console.log(this.element.parentElement);
+            this.service.updateTranslations(this.element.parentElement);
+          }
+        }], [{
+          key: 'inject',
+          value: [Element, I18N],
+          enumerable: true
+        }]);
+
+        return TCustomAttribute;
+      })();
+
+      _export('TCustomAttribute', TCustomAttribute);
     }
   };
 });

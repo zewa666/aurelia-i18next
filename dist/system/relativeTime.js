@@ -22,8 +22,10 @@ System.register(['./i18n', './defaultTranslations/relative.time'], function (_ex
 
           this.service = i18n;
 
-          Object.keys(translations['default']).map(function (key) {
-            var translation = translations['default'][key].translation;
+          var trans = translations['default'] || translations;
+
+          Object.keys(trans).map(function (key) {
+            var translation = trans[key].translation;
             var options = i18n.i18next.options;
 
             if (options.interpolationPrefix !== '__' || options.interpolationSuffix !== '__') {

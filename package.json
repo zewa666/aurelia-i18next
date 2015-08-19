@@ -1,6 +1,6 @@
 {
   "name": "aurelia-i18next",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "An Aurelia-Wrapper for the library i18next",
   "keywords": [
     "aurelia",
@@ -43,9 +43,9 @@
   },
   "jspm": {
     "main": "index",
-    "format": "register",
+    "format": "amd",
     "directories": {
-      "lib": "dist/system"
+      "lib": "dist/amd"
     },
     "dependencies": {
       "Intl.js": "github:andyearnshaw/Intl.js@^0.1.4",

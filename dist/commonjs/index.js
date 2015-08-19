@@ -60,6 +60,27 @@ Object.defineProperty(exports, 'TValueConverter', {
     return _TValueConverter.TValueConverter;
   }
 });
+Object.defineProperty(exports, 'TCustomAttribute', {
+  enumerable: true,
+  get: function get() {
+    return _TValueConverter.TCustomAttribute;
+  }
+});
+
+var _BaseI18N = require('./base-i18n');
+
+Object.defineProperty(exports, 'BaseI18N', {
+  enumerable: true,
+  get: function get() {
+    return _BaseI18N.BaseI18N;
+  }
+});
+Object.defineProperty(exports, 'EventAggregator', {
+  enumerable: true,
+  get: function get() {
+    return _EventAggregator.EventAggregator;
+  }
+});
 
 function configure(config, cb) {
   if (cb === undefined || typeof cb !== 'function') {

@@ -199,6 +199,20 @@ export class MyDemoVM {
 }
 ```
 
+Alternatively you may extend your VM with the provided Base-I18N-VM, which will set that up for you automatically.
+
+```javascript
+import {BaseI18N} from 'aurelia-i18next';
+
+export class MyDemoVM extends BaseI18N {
+
+}
+```
+
+> Just remember in case you define your own `constructor`, to call `this.super` and pass it the instances of its
+dependencies as described in the previous example. Same applies to `attached`, although nothing needs to be passed
+in here
+
 #### Specifying attributes
 By default the plugin will set the `textContent` property of an element.
 

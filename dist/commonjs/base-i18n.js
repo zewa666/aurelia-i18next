@@ -10,51 +10,34 @@ Object.defineProperty(exports, '__esModule', {
 
 var _I18N = require('./i18n');
 
-var TValueConverter = (function () {
-  function TValueConverter(i18n) {
-    _classCallCheck(this, TValueConverter);
+var _EventAggregator = require('aurelia-event-aggregator');
 
-    this.service = i18n;
-  }
+var BaseI18N = (function () {
+  function BaseI18N(i18n, element, ea) {
+    var _this = this;
 
-  _createClass(TValueConverter, [{
-    key: 'toView',
-    value: function toView(value, options) {
-      return this.service.tr(value, options);
-    }
-  }], [{
-    key: 'inject',
-    value: function inject() {
-      return [_I18N.I18N];
-    }
-  }]);
+    _classCallCheck(this, BaseI18N);
 
-  return TValueConverter;
-})();
-
-exports.TValueConverter = TValueConverter;
-
-var TCustomAttribute = (function () {
-  function TCustomAttribute(element, i18n) {
-    _classCallCheck(this, TCustomAttribute);
-
+    this.i18n = i18n;
     this.element = element;
-    this.service = i18n;
+
+    ea.subscribe('i18n:locale:changed', function (payload) {
+      _this.i18n.updateTranslations(_this.element);
+    });
   }
 
-  _createClass(TCustomAttribute, [{
-    key: 'valueChanged',
-    value: function valueChanged() {
-      console.log(this.element.parentElement);
-      this.service.updateTranslations(this.element.parentElement);
+  _createClass(BaseI18N, [{
+    key: 'attached',
+    value: function attached() {
+      this.i18n.updateTranslations(this.element);
     }
   }], [{
     key: 'inject',
-    value: [Element, _I18N.I18N],
+    value: [_I18N.I18N, Element, _EventAggregator.EventAggregator],
     enumerable: true
   }]);
 
-  return TCustomAttribute;
+  return BaseI18N;
 })();
 
-exports.TCustomAttribute = TCustomAttribute;
+exports.BaseI18N = BaseI18N;

@@ -17,8 +17,10 @@ define(['exports', './i18n', './defaultTranslations/relative.time'], function (e
 
       this.service = i18n;
 
-      Object.keys(_defaultTranslationsRelativeTime['default']).map(function (key) {
-        var translation = _defaultTranslationsRelativeTime['default'][key].translation;
+      var trans = _defaultTranslationsRelativeTime['default'] || _defaultTranslationsRelativeTime;
+
+      Object.keys(trans).map(function (key) {
+        var translation = trans[key].translation;
         var options = i18n.i18next.options;
 
         if (options.interpolationPrefix !== '__' || options.interpolationSuffix !== '__') {

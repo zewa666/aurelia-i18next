@@ -10,3 +10,18 @@ export class TValueConverter {
     return this.service.tr(value, options);
   }
 }
+
+export class TCustomAttribute {
+
+  static inject = [Element, I18N];
+
+  constructor(element, i18n) {
+    this.element = element;
+    this.service = i18n;
+  }
+
+  valueChanged(){
+    console.log(this.element.parentElement);
+    this.service.updateTranslations(this.element.parentElement);
+  }
+}

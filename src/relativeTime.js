@@ -6,8 +6,10 @@ export class RelativeTime {
   constructor(i18n) {
     this.service = i18n;
 
-    Object.keys(translations.default).map( (key) => {
-      let translation = translations.default[key]['translation'];
+    let trans = translations.default || translations;
+
+    Object.keys(trans).map( (key) => {
+      let translation = trans[key]['translation'];
       let options = i18n.i18next.options;
 
       if(options.interpolationPrefix !== '__' || options.interpolationSuffix !== '__') {

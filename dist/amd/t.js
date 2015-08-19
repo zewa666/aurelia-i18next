@@ -32,4 +32,29 @@ define(['exports', './i18n'], function (exports, _i18n) {
   })();
 
   exports.TValueConverter = TValueConverter;
+
+  var TCustomAttribute = (function () {
+    function TCustomAttribute(element, i18n) {
+      _classCallCheck(this, TCustomAttribute);
+
+      this.element = element;
+      this.service = i18n;
+    }
+
+    _createClass(TCustomAttribute, [{
+      key: 'valueChanged',
+      value: function valueChanged() {
+        console.log(this.element.parentElement);
+        this.service.updateTranslations(this.element.parentElement);
+      }
+    }], [{
+      key: 'inject',
+      value: [Element, _i18n.I18N],
+      enumerable: true
+    }]);
+
+    return TCustomAttribute;
+  })();
+
+  exports.TCustomAttribute = TCustomAttribute;
 });

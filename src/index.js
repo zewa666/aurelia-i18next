@@ -7,6 +7,9 @@ export {DfValueConverter} from './df';
 export {NfValueConverter} from './nf';
 export {RtValueConverter} from './rt';
 export {TValueConverter} from './t';
+export {TCustomAttribute} from './t';
+export {BaseI18N} from './base-i18n'
+export {EventAggregator} from 'aurelia-event-aggregator';
 
 export function configure(config, cb){
   if(cb === undefined || typeof cb !== 'function') {
