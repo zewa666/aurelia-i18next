@@ -10,6 +10,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var _I18N = require('./i18n');
 
+var _customAttribute = require('aurelia-templating');
+
 var TValueConverter = (function () {
   function TValueConverter(i18n) {
     _classCallCheck(this, TValueConverter);
@@ -36,13 +38,15 @@ exports.TValueConverter = TValueConverter;
 
 var TCustomAttribute = (function () {
   function TCustomAttribute(element, i18n) {
-    _classCallCheck(this, TCustomAttribute);
+    _classCallCheck(this, _TCustomAttribute);
 
     this.element = element;
     this.service = i18n;
   }
 
-  _createClass(TCustomAttribute, [{
+  var _TCustomAttribute = TCustomAttribute;
+
+  _createClass(_TCustomAttribute, [{
     key: 'valueChanged',
     value: function valueChanged() {
       if (this.element.parentElement !== undefined) {
@@ -55,6 +59,7 @@ var TCustomAttribute = (function () {
     enumerable: true
   }]);
 
+  TCustomAttribute = _customAttribute.customAttribute('t')(TCustomAttribute) || TCustomAttribute;
   return TCustomAttribute;
 })();
 

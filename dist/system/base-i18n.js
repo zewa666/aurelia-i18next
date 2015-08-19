@@ -23,7 +23,7 @@ System.register(['./i18n', 'aurelia-event-aggregator'], function (_export) {
           this.i18n = i18n;
           this.element = element;
 
-          ea.subscribe('i18n:locale:changed', function (payload) {
+          this.__i18nDisposer = ea.subscribe('i18n:locale:changed', function (payload) {
             _this.i18n.updateTranslations(_this.element);
           });
         }
@@ -32,6 +32,11 @@ System.register(['./i18n', 'aurelia-event-aggregator'], function (_export) {
           key: 'attached',
           value: function attached() {
             this.i18n.updateTranslations(this.element);
+          }
+        }, {
+          key: 'detached',
+          value: function detached() {
+            this.__i18nDisposer();
           }
         }], [{
           key: 'inject',

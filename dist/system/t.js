@@ -1,9 +1,11 @@
-System.register(['./i18n'], function (_export) {
-  var I18N, _classCallCheck, _createClass, TValueConverter, TCustomAttribute;
+System.register(['./i18n', 'aurelia-templating'], function (_export) {
+  var I18N, customAttribute, _classCallCheck, _createClass, TValueConverter, TCustomAttribute;
 
   return {
     setters: [function (_i18n) {
       I18N = _i18n.I18N;
+    }, function (_aureliaTemplating) {
+      customAttribute = _aureliaTemplating.customAttribute;
     }],
     execute: function () {
       'use strict';
@@ -38,13 +40,15 @@ System.register(['./i18n'], function (_export) {
 
       TCustomAttribute = (function () {
         function TCustomAttribute(element, i18n) {
-          _classCallCheck(this, TCustomAttribute);
+          _classCallCheck(this, _TCustomAttribute);
 
           this.element = element;
           this.service = i18n;
         }
 
-        _createClass(TCustomAttribute, [{
+        var _TCustomAttribute = TCustomAttribute;
+
+        _createClass(_TCustomAttribute, [{
           key: 'valueChanged',
           value: function valueChanged() {
             if (this.element.parentElement !== undefined) {
@@ -57,6 +61,7 @@ System.register(['./i18n'], function (_export) {
           enumerable: true
         }]);
 
+        TCustomAttribute = customAttribute('t')(TCustomAttribute) || TCustomAttribute;
         return TCustomAttribute;
       })();
 

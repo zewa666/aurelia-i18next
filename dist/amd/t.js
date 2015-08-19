@@ -1,4 +1,4 @@
-define(['exports', './i18n'], function (exports, _i18n) {
+define(['exports', './i18n', 'aurelia-templating'], function (exports, _i18n, _aureliaTemplating) {
   'use strict';
 
   var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -35,13 +35,15 @@ define(['exports', './i18n'], function (exports, _i18n) {
 
   var TCustomAttribute = (function () {
     function TCustomAttribute(element, i18n) {
-      _classCallCheck(this, TCustomAttribute);
+      _classCallCheck(this, _TCustomAttribute);
 
       this.element = element;
       this.service = i18n;
     }
 
-    _createClass(TCustomAttribute, [{
+    var _TCustomAttribute = TCustomAttribute;
+
+    _createClass(_TCustomAttribute, [{
       key: 'valueChanged',
       value: function valueChanged() {
         if (this.element.parentElement !== undefined) {
@@ -54,6 +56,7 @@ define(['exports', './i18n'], function (exports, _i18n) {
       enumerable: true
     }]);
 
+    TCustomAttribute = _aureliaTemplating.customAttribute('t')(TCustomAttribute) || TCustomAttribute;
     return TCustomAttribute;
   })();
 

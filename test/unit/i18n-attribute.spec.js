@@ -11,14 +11,14 @@ describe('testing i18n attributes', () => {
   });
 
 
-  it('should raise value change on simple custom attribute', done => {
+  it('should raise value change on i18n custom attribute', done => {
     var i18nAttribute = BehaviorInstance.createForUnitTest(TCustomAttribute);
     spyOn(i18nAttribute, 'valueChanged');
 
     i18nAttribute.value = 'foo';
 
     setTimeout(() => {
-      expect(att.valueChanged).toHaveBeenCalledWith('foo', undefined);
+      expect(i18nAttribute.valueChanged).toHaveBeenCalledWith('foo', undefined);
       done();
     });
   });

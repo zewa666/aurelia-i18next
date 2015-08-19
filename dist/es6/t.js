@@ -1,4 +1,6 @@
 import {I18N} from './i18n';
+import {customAttribute} from 'aurelia-templating';
+
 
 export class TValueConverter {
   static inject() { return [I18N]; }
@@ -11,6 +13,7 @@ export class TValueConverter {
   }
 }
 
+@customAttribute('t')
 export class TCustomAttribute {
 
   static inject = [Element, I18N];

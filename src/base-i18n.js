@@ -9,12 +9,16 @@ export class BaseI18N {
     this.i18n = i18n;
     this.element = element;
 
-    ea.subscribe('i18n:locale:changed', payload => {
+    this.__i18nDisposer = ea.subscribe('i18n:locale:changed', payload => {
       this.i18n.updateTranslations(this.element);
     });
   }
 
   attached(){
     this.i18n.updateTranslations(this.element);
+  }
+
+  detached() {
+    this.__i18nDisposer();
   }
 }

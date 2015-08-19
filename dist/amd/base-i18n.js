@@ -18,7 +18,7 @@ define(['exports', './i18n', 'aurelia-event-aggregator'], function (exports, _i1
       this.i18n = i18n;
       this.element = element;
 
-      ea.subscribe('i18n:locale:changed', function (payload) {
+      this.__i18nDisposer = ea.subscribe('i18n:locale:changed', function (payload) {
         _this.i18n.updateTranslations(_this.element);
       });
     }
@@ -27,6 +27,11 @@ define(['exports', './i18n', 'aurelia-event-aggregator'], function (exports, _i1
       key: 'attached',
       value: function attached() {
         this.i18n.updateTranslations(this.element);
+      }
+    }, {
+      key: 'detached',
+      value: function detached() {
+        this.__i18nDisposer();
       }
     }], [{
       key: 'inject',
