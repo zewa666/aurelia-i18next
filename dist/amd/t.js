@@ -44,7 +44,6 @@ define(['exports', './i18n'], function (exports, _i18n) {
     _createClass(TCustomAttribute, [{
       key: 'valueChanged',
       value: function valueChanged() {
-        console.log(this.element.parentElement);
         this.service.updateTranslations(this.element.parentElement);
       }
     }], [{
