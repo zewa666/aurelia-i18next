@@ -3,11 +3,12 @@ System.config({
   "transpiler": "babel",
   "babelOptions": {
     "optional": [
-      "es7.decorators"
+      "runtime",
+      "es7.decorators",
+      "es7.classProperties"
     ]
   },
   "paths": {
-    "aurelia-i18next/*": "dist\\system/*js",
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   }

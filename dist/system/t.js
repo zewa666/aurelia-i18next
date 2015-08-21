@@ -51,7 +51,7 @@ System.register(['./i18n', 'aurelia-templating'], function (_export) {
         _createClass(_TCustomAttribute, [{
           key: 'valueChanged',
           value: function valueChanged() {
-            if (this.element.parentElement !== undefined) {
+            if (this.element.parentElement !== undefined && this.element.parentElement !== null) {
               this.service.updateTranslations(this.element.parentElement);
             }
           }
